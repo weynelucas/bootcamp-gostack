@@ -21,7 +21,6 @@
 .CreatePost form input {
   flex: 1;
   padding: 10px 15px;
-  border: 1px solid #ccd0d5;
-  background-color: #eeeeee; 
-  border-radius: 20px;
+  border: none;
+  font-size: 14px;
 }
