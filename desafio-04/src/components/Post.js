@@ -9,7 +9,7 @@ export default function Post({ post }) {
     <div className="Post">
       <div className="Post-content">
         <div className="Post-header">
-          <img src={post.author.avatar} alt={post.author.name} />
+          <img className="avatar" src={post.author.avatar} alt={post.author.name} />
           <div className="Post-details">
             <strong>{post.author.name}</strong>
             <small>{post.date}</small>
@@ -17,6 +17,7 @@ export default function Post({ post }) {
         </div>
         <p>{post.content}</p>
       </div>
+      
       <div className="Post-comments">
         {post.comments.map(comment => (
           <Comment key={comment.id} comment={comment}/>

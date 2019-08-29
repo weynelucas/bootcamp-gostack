@@ -4,12 +4,6 @@
   margin: 10px 0;
 }
 
-.Comment img {
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-}
-
 .Comment p {
   font-size: 13px;
   background-color: #eeeeee;
