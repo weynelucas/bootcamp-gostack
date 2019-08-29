@@ -7,6 +7,8 @@ import './Post.css';
 
 export default class Post extends Component {
   render() {
+    const { post } = this.props;
+
     return (
       <div className="Post">
         <div className="Post-content">
