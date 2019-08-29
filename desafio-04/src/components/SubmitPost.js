@@ -32,9 +32,8 @@ export default class SubmitPost extends Component {
               type="text"
               onChange={this.handleInputChange}
               value={content}
-              placeholder={`No que você está pensando, ${author.name}?`}
+              placeholder={`No que você está pensando${author.name ? ', ' + author.name : '' }?`}
             />
-
           </form>
         ) }
       </div>
