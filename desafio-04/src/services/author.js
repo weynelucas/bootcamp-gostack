@@ -4,8 +4,8 @@ const api = axios.create({
   baseURL: 'https://uinames.com/api/'
 });
 
-export default async function getRandomAuthor() {
-  const response = await api.get('', {
+async function getRandomAuthor() {
+  const response = await api.get(null, {
     params: {
       ext: true,
       region: 'Brazil'
@@ -19,3 +19,5 @@ export default async function getRandomAuthor() {
     avatar,
   }
 }
+
+export { getRandomAuthor }

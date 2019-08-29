@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
+import CreatePost from './CreatePost';
 
 import './PostList.css';
 
@@ -57,11 +58,14 @@ export default class PostList extends Component {
 
   render() {
     return (
-      <div className="PostList">
-        {this.state.posts.map(post => (
-          <Post key={post.id} post={post}/>
-        ))}
-      </div>
+      <>
+        <CreatePost/>
+        <div className="PostList">
+          {this.state.posts.map(post => (
+            <Post key={post.id} post={post}/>
+          ))}
+        </div>
+      </>
     );
   }
 }
