@@ -20,12 +20,6 @@
   justify-content: flex-start;
 }
 
-.Post .Post-content .Post-header img {
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-}
-
 .Post .Post-content .Post-header .Post-details {
   display: flex;
   flex-direction: column;

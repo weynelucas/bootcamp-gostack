@@ -1,0 +1,13 @@
+.SubmitComment form {
+  display: flex;
+  align-items: center;
+}
+
+.SubmitComment form input {
+  margin-left: 10px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccd0d5;
+  background-color: #f2f3f5;
+  flex: 1;
+}
