@@ -24,18 +24,15 @@ export default class Main extends Component {
   }
   
   render() {
-    return (
+    return this.state.user && (
       <>
-        {this.state.user && (
-          <>
-            <Header user={this.state.user}/>
-            <div className="Main-content">
-              <CreatePost author={this.state.user}/>
-              <PostList />
-            </div>
-          </>
-        )}
+        <Header user={this.state.user} />
+        <div className="Main-content">
+          <CreatePost author={this.state.user} />
+          <PostList />
+        </div>
       </>
-    );
+    )
+
   }
 }
