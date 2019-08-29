@@ -1,14 +1,8 @@
 import React from 'react';
 
 import './App.css';
-import Header from './components/Header';
-import PostList from './components/PostList';
+import Main from './components/Main';
 
 export default function App() {
-  return (
-    <>
-      <Header/>
-      <PostList/>
-    </>
-  )
+  return <Main />;
 }

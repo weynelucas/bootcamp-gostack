@@ -9,20 +9,6 @@ import './CreatePost.css';
 export default class CreatePost extends Component {
   state = {
     content: '',
-    author: {
-
-    }
-  }
-
-  async loadAuthor() {
-    this.setState({
-      author: await getRandomAuthor(),
-      content: ''
-    });
-  }
-
-  componentDidMount() {
-    this.loadAuthor();
   }
 
   handleInputChange = e => {
@@ -33,17 +19,15 @@ export default class CreatePost extends Component {
     e.preventDefault();
 
     const post = {
-      author: this.state.author,
       content: this.state.content,
       date: format(new Date(), "dd MMM yyyy", { locale: ptBR }),
       comments: [],
     };
-
-    this.loadAuthor();
   }
 
   render() {
-    const { content, author } = this.state;
+    const { author } = this.props;
+    const { content } = this.state;
 
     return (
       <div className="CreatePost">

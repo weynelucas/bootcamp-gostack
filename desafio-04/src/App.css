@@ -20,3 +20,10 @@ body, input, button {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+
+img.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
