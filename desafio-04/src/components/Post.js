@@ -6,8 +6,25 @@ import SubmitComment from './SubmitComment';
 import './Post.css';
 
 export default class Post extends Component {
+  state = {
+    comments: []
+  }
+
+  addComment = comment => {
+    this.setState({
+      comments: [
+        ...this.state.comments,
+        {
+          id: this.state.comments.length + 1,
+          ...comment
+        }
+      ]
+    })
+  }
+
   render() {
     const { post } = this.props;
+    const { comments } = this.state;
 
     return (
       <div className="Post">
@@ -23,11 +40,11 @@ export default class Post extends Component {
         </div>
         
         <div className="Post-comments">
-          {post.comments.map(comment => (
+          {comments.map(comment => (
             <Comment key={comment.id} comment={comment}/>
           ))}
   
-          <SubmitComment onSubmit={this.onSubmit}/>
+          <SubmitComment onSubmit={this.addComment}/>
         </div>
       </div>
     );
