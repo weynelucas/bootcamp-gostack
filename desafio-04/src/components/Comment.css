@@ -1,0 +1,20 @@
+.Comment {
+  display: flex;
+  align-items: flex-start;
+  margin: 10px 0;
+}
+
+.Comment img {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+}
+
+.Comment p {
+  font-size: 13px;
+  background-color: #eeeeee;
+  flex: 1;
+  margin-left: 10px;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
