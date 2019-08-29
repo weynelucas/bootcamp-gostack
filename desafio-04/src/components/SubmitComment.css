@@ -1,9 +1,9 @@
-.SubmitComment {
+.SubmitComment form {
   display: flex;
   align-items: center;
 }
 
-.SubmitComment input {
+.SubmitComment form input {
   margin-left: 10px;
   padding: 10px 15px;
   border-radius: 20px;
