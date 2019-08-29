@@ -8,7 +8,7 @@ const api = axios.create({
   }
 });
 
-async function getRandomAuthor() {
+async function getRandomUser() {
   const { name, surname, photo: avatar } = (await api.get()).data;
   
   return {
@@ -17,4 +17,4 @@ async function getRandomAuthor() {
   }
 }
 
-export { getRandomAuthor }
+export { getRandomUser };

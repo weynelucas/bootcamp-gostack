@@ -6,20 +6,23 @@ import Header from './Header';
 import SubmitPost from './SubmitPost';
 import PostList from './PostList';
 
-import { getRandomAuthor } from '../services/author'
+import { getRandomUser } from '../services/user'
 
 import './Main.css';
+import defaultAvatar from '../assets/default-male-avatar.jpg';
 
 export default class Main extends Component {
   state = {
-    user: {},
+    user: {
+      avatar: defaultAvatar,
+    },
     posts: [],
   }
 
   async loadUser() {
     this.setState({
-      user: await getRandomAuthor()
-    })
+      user: await getRandomUser()
+    });
   }
 
   componentDidMount() {

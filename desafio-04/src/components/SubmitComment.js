@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 
-import { getRandomAuthor } from '../services/author';
+import { getRandomUser } from '../services/user';
 
 import './SubmitComment.css';
+import defaultAvatar from '../assets/default-male-avatar.jpg';
+
 
 export default class SubmitComment extends Component {
   state = {
-    author: {},
-    content: ''
+    content: '',
+    author: {
+      avatar: defaultAvatar,
+    },
   }
 
   async loadAuthor() {
     this.setState({
-      author: await getRandomAuthor(),
+      author: await getRandomUser(),
     })
   }
 

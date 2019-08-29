@@ -4,7 +4,7 @@ import './Header.css';
 import logo from '../assets/logo.svg'
 
 export default function Header({ user }) {
-  const { name, avatar } = user;
+  const { name = 'Meu Perfil', avatar } = user;
 
   return (
     <nav>
