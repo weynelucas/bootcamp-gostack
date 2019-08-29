@@ -1,19 +1,16 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://uinames.com/api/'
+  baseURL: 'https://uinames.com/api/',
+  params: {
+    ext: true,
+    region: 'Brazil',
+  }
 });
 
 async function getRandomAuthor() {
-  const response = await api.get(null, {
-    params: {
-      ext: true,
-      region: 'Brazil'
-    }
-  })
-
-  const { name, surname, photo: avatar } = response.data;
-
+  const { name, surname, photo: avatar } = (await api.get()).data;
+  
   return {
     name: `${name} ${surname}`,
     avatar,
