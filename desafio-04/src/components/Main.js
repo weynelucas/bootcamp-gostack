@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 import Header from './Header';
-import CreatePost from './CreatePost';
+import SubmitPost from './SubmitPost';
 import PostList from './PostList';
 
 import { getRandomAuthor } from '../services/author'
@@ -24,14 +26,16 @@ export default class Main extends Component {
     this.loadUser();
   }
 
-  addPost = (post) => {
+  addPost = (content) => {
     this.setState({ 
       posts: [
         ...this.state.posts, 
         {  
           id: this.state.posts.length + 1, 
           author: this.state.user,
-          ...post 
+          content: content,
+          date: format(new Date(), 'dd MMM yyyy', { locale: ptBR }),
+          comments: [],
         }
       ]
     });
@@ -42,9 +46,9 @@ export default class Main extends Component {
       <>
         <Header user={this.state.user} />
         <div className="Main-content">
-          <CreatePost 
+          <SubmitPost 
             author={this.state.user} 
-            onPostSubmit={this.addPost} 
+            onSubmit={this.addPost} 
           />
           
           <PostList posts={this.state.posts}/>
