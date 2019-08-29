@@ -6,7 +6,8 @@ import './SubmitComment.css';
 
 export default class SubmitComment extends Component {
   state = {
-    author: {}
+    author: {},
+    content: ''
   }
 
   async loadAuthor() {
@@ -15,18 +16,43 @@ export default class SubmitComment extends Component {
     })
   }
 
+  clearInput() {
+    this.setState({ content: '' })
+  }
+
   componentDidMount() {
     this.loadAuthor();
   }
 
+  handleInputChange = e => {
+    this.setState({ content: e.target.value })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.props.onSubmit({
+      author: this.state.author,
+      content: this.state.content,
+    })
+
+    this.clearInput();
+    this.loadAuthor();
+  }
+
   render() {
-    const { author } = this.state;
+    const { author, content } = this.state;
 
     return (
       <div className="SubmitComment">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <img src={author.avatar} alt={author.name} className="avatar"/>
-          <input type="text" placeholder="Escreva um comentário..."/>
+          <input 
+            type="text" 
+            placeholder="Escreva um comentário..."
+            value={content}
+            onChange={this.handleInputChange}
+          />
         </form>
       </div>
     );
