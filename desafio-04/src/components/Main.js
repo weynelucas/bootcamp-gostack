@@ -30,6 +30,7 @@ export default class Main extends Component {
         ...this.state.posts, 
         {  
           id: this.state.posts.length + 1, 
+          author: this.state.user,
           ...post 
         }
       ]
