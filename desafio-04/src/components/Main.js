@@ -32,14 +32,13 @@ export default class Main extends Component {
   addPost = (content) => {
     this.setState({ 
       posts: [
-        ...this.state.posts, 
         {  
           id: this.state.posts.length + 1, 
           author: this.state.user,
           content: content,
           date: format(new Date(), 'dd MMM yyyy', { locale: ptBR }),
-          comments: [],
-        }
+        },
+        ...this.state.posts, 
       ]
     });
   }
@@ -48,11 +47,9 @@ export default class Main extends Component {
     return this.state.user && (
       <>
         <Header user={this.state.user} />
+
         <div className="Main-content">
-          <SubmitPost 
-            author={this.state.user} 
-            onSubmit={this.addPost} 
-          />
+          <SubmitPost author={this.state.user} onSubmit={this.addPost} />
           
           <PostList posts={this.state.posts}/>
         </div>
