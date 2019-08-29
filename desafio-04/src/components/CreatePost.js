@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale'
 
 import { getRandomAuthor } from '../services/author';
+
+import './CreatePost.css';
 
 export default class CreatePost extends Component {
   state = {
@@ -10,10 +14,10 @@ export default class CreatePost extends Component {
     }
   }
 
-
   async loadAuthor() {
     this.setState({
-      author: await getRandomAuthor()
+      author: await getRandomAuthor(),
+      content: ''
     });
   }
 
@@ -25,13 +29,26 @@ export default class CreatePost extends Component {
     this.setState({ content: e.target.value });
   }
 
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const post = {
+      author: this.state.author,
+      content: this.state.content,
+      date: format(new Date(), "dd MMM yyyy", { locale: ptBR }),
+      comments: [],
+    };
+
+    this.loadAuthor();
+  }
+
   render() {
     const { content, author } = this.state;
-    console.log(author);
+
     return (
       <div className="CreatePost">
         { author && (
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <img src={author.avatar} alt={author.name}/>
             <input 
               type="text"

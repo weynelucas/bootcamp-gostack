@@ -58,14 +58,13 @@ export default class PostList extends Component {
 
   render() {
     return (
-      <>
-        <CreatePost/>
-        <div className="PostList">
-          {this.state.posts.map(post => (
-            <Post key={post.id} post={post}/>
-          ))}
-        </div>
-      </>
+      <div className="PostList">
+        <CreatePost />
+        
+        {this.state.posts.map(post => (
+          <Post key={post.id} post={post} />
+        ))}
+      </div>
     );
   }
 }

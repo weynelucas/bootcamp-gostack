@@ -1,0 +1,27 @@
+.CreatePost {
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow:  0px 0px 10px rgba(0, 0, 0, 0.133916);
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.CreatePost form {
+  display: flex;
+  align-self: flex-start;
+}
+
+.CreatePost form img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.CreatePost form input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccd0d5;
+  background-color: #eeeeee; 
+  border-radius: 20px;
+}
