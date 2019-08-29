@@ -18,11 +18,13 @@ export default class CreatePost extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const post = {
+    this.props.onPostSubmit({
       content: this.state.content,
       date: format(new Date(), "dd MMM yyyy", { locale: ptBR }),
       comments: [],
-    };
+    });
+
+    this.setState({ content: '' });
   }
 
   render() {

@@ -10,7 +10,8 @@ import './Main.css';
 
 export default class Main extends Component {
   state = {
-    user: {}
+    user: {},
+    posts: [],
   }
 
   async loadUser() {
@@ -22,14 +23,30 @@ export default class Main extends Component {
   componentDidMount() {
     this.loadUser();
   }
+
+  addPost = (post) => {
+    this.setState({ 
+      posts: [
+        ...this.state.posts, 
+        {  
+          id: this.state.posts.length + 1, 
+          ...post 
+        }
+      ]
+    });
+  }
   
   render() {
     return this.state.user && (
       <>
         <Header user={this.state.user} />
         <div className="Main-content">
-          <CreatePost author={this.state.user} />
-          <PostList />
+          <CreatePost 
+            author={this.state.user} 
+            onPostSubmit={this.addPost} 
+          />
+          
+          <PostList posts={this.state.posts}/>
         </div>
       </>
     )
