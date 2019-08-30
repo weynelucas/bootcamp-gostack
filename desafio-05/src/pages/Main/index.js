@@ -15,7 +15,7 @@ export default function Main() {
       <Form>
         <input type="text" placeholder="Find a repository..." />
         <SubmitButton>
-          <GoRepo />
+          <GoRepo size={16} />
           New
         </SubmitButton>
       </Form>

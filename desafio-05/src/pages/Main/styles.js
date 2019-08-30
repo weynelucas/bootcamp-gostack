@@ -26,7 +26,7 @@ export const Form = styled.form`
 
   input {
     flex: 1;
-    padding: 10px 15px;
+    padding: 5px 10px;
     margin-right: 10px;
     border-radius: 3px;
     border: 1px solid #d1d5da;
