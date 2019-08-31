@@ -16,6 +16,10 @@ export const ButtonList = styled.div`
     color: #0366d6;
     font-weight: 500;
 
+    &:hover {
+      background-color: #eff3f6;
+    }
+
     &[disabled] {
       opacity: 0.2;
       cursor: not-allowed;
