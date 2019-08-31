@@ -12,6 +12,13 @@ export default class Pagination extends Component {
     return this.state.page > 1;
   }
 
+  get hasNextPage() {
+    const { page } = this.state;
+    const { totalItems, itemsPerPage } = this.props;
+
+    return page * itemsPerPage <= totalItems;
+  }
+
   componentDidMount() {
     this.setState({ page: this.props.page });
   }
@@ -28,6 +35,7 @@ export default class Pagination extends Component {
 
   render() {
     const { page } = this.state;
+    const { totalItems } = this.props;
 
     return (
       <Container>
@@ -38,7 +46,12 @@ export default class Pagination extends Component {
           >
             Previous
           </button>
-          <button onClick={() => this.setPage(page + 1)}>Next</button>
+          <button
+            disabled={this.hasNextPage ? 0 : 1}
+            onClick={() => this.setPage(page + 1)}
+          >
+            Next
+          </button>
         </ButtonList>
       </Container>
     );
@@ -47,6 +60,8 @@ export default class Pagination extends Component {
 
 Pagination.prototypes = {
   page: PropTypes.number,
+  totalItems: PropTypes.number,
+  itemsPerPage: PropTypes.number,
   onPageChanged: PropTypes.func,
 };
 
