@@ -11,6 +11,7 @@ export default class Repository extends React.Component {
     repository: {},
     issues: [],
     loading: true,
+    issuesLoading: false,
   };
 
   async componentDidMount() {
@@ -38,6 +39,8 @@ export default class Repository extends React.Component {
       repository: { full_name: repoName },
     } = this.state;
 
+    this.setState({ issuesLoading: true });
+
     const issues = await api.get(`repos/${repoName}/issues`, {
       params: {
         per_page: 5,
@@ -46,11 +49,11 @@ export default class Repository extends React.Component {
       },
     });
 
-    this.setState({ issues: issues.data });
+    this.setState({ issues: issues.data, issuesLoading: false });
   };
 
   render() {
-    const { repository, issues, loading, page } = this.state;
+    const { repository, issues, issuesLoading, loading, page } = this.state;
 
     if (loading) {
       return <Loading>Carregando...</Loading>;
@@ -63,7 +66,7 @@ export default class Repository extends React.Component {
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
-        <IssueList>
+        <IssueList loading={issuesLoading ? 1 : 0}>
           {issues.map(issue => (
             <li key={issue.id}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />

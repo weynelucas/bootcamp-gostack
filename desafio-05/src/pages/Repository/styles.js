@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Loading = styled.div`
   height: 100vh;
@@ -95,4 +95,10 @@ export const IssueList = styled.ul`
       }
     }
   }
+
+  ${props =>
+    props.loading &&
+    css`
+      opacity: 0.2;
+    `}
 `;
