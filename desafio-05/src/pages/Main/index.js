@@ -5,7 +5,8 @@ import { GoMarkGithub, GoRepo, GoSync } from 'react-icons/go';
 
 import api from '../../services/api';
 
-import { Container, Form, SubmitButton, List } from './styles';
+import Container from '../../components/Container';
+import { Form, SubmitButton, List, Title } from './styles';
 
 export default class Main extends React.Component {
   state = {
@@ -55,10 +56,10 @@ export default class Main extends React.Component {
 
     return (
       <Container>
-        <h1>
+        <Title>
           <GoMarkGithub />
           Repositories
-        </h1>
+        </Title>
 
         <Form onSubmit={this.handleSubmit}>
           <input

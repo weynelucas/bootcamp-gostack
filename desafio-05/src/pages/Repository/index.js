@@ -2,6 +2,7 @@ import React from 'react';
 
 import api from '../../services/api';
 
+import Container from '../../components/Container';
 import { Loading } from './styles';
 
 export default class Repository extends React.Component {
@@ -38,6 +39,6 @@ export default class Repository extends React.Component {
       return <Loading>Carregando...</Loading>;
     }
 
-    return <h1>Repository: {decodeURIComponent(repository.name)}</h1>;
+    return <Container>Repository</Container>;
   }
 }

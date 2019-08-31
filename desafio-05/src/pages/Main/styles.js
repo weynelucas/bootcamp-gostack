@@ -10,23 +10,14 @@ const rotate = keyframes`
   }
 `;
 
-export const Container = styled.div`
-  width: 700px;
-  background-color: #fff;
-  border: 1px solid #d1d5da;
-  border-radius: 3px;
-  padding: 30px;
-  margin: 80px auto;
+export const Title = styled.h1`
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 
-  h1 {
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    svg {
-      margin-right: 10px;
-    }
+  svg {
+    margin-right: 10px;
   }
 `;
 
