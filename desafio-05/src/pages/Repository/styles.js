@@ -44,11 +44,20 @@ export const IssueList = styled.ul`
     flex-direction: row;
     align-items: flex-start;
     padding: 10px 15px;
-    border: 1px solid #d1d5da;
-    border-radius: 3px;
+    border-color: #d1d5da;
+    border-style: solid;
+    border-width: 1px;
+
+    &:first-child {
+      border-radius: 3px 3px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 3px 3px;
+    }
 
     & + li {
-      margin-top: 10px;
+      border-top: none;
     }
 
     img {
