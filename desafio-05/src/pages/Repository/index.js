@@ -2,12 +2,13 @@ import React from 'react';
 
 import api from '../../services/api';
 
-// import { Container } from './styles';
+import { Loading } from './styles';
 
 export default class Repository extends React.Component {
   state = {
     repository: {},
     issues: [],
+    loading: true,
   };
 
   async componentDidMount() {
@@ -26,11 +27,16 @@ export default class Repository extends React.Component {
     this.setState({
       repository: repository.data,
       issues: issues.data,
+      loading: false,
     });
   }
 
   render() {
-    const { repository, issues } = this.state;
+    const { repository, issues, loading } = this.state;
+
+    if (loading) {
+      return <Loading>Carregando...</Loading>;
+    }
 
     return <h1>Repository: {decodeURIComponent(repository.name)}</h1>;
   }
