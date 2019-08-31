@@ -34,7 +34,7 @@ export default class Repository extends React.Component {
     });
   }
 
-  loadIssues = async page => {
+  loadIssues = async ({ page, per_page = 5, state = 'open' }) => {
     const {
       repository: { full_name: repoName },
     } = this.state;
@@ -43,9 +43,9 @@ export default class Repository extends React.Component {
 
     const issues = await api.get(`repos/${repoName}/issues`, {
       params: {
-        per_page: 5,
-        state: 'open',
-        page: page,
+        state,
+        page,
+        per_page,
       },
     });
 
@@ -82,11 +82,12 @@ export default class Repository extends React.Component {
             </li>
           ))}
         </IssueList>
+
         <Pagination
           page={page}
           totalItems={repository.open_issues_count}
           itemsPerPage={5}
-          onPageChanged={this.loadIssues}
+          onPageChanged={page => this.loadIssues({ page })}
         />
       </Container>
     );
