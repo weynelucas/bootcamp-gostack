@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+`;
 
 export const Container = styled.div`
   width: 700px;
@@ -57,4 +67,12 @@ export const SubmitButton = styled.button.attrs(props => ({
     opacity: 0.2;
     cursor: not-allowed;
   }
+
+  ${props =>
+    props.loading &&
+    css`
+      svg {
+        animation: ${rotate} 2s linear infinite;
+      }
+    `}
 `;
