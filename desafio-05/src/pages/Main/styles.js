@@ -33,9 +33,11 @@ export const Form = styled.form`
     font-size: 16px;
   }
 `;
-export const SubmitButton = styled.button.attrs({
+
+export const SubmitButton = styled.button.attrs(props => ({
   type: 'submit',
-})`
+  disabled: props.loading,
+}))`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,5 +51,10 @@ export const SubmitButton = styled.button.attrs({
 
   svg {
     margin-right: 5px;
+  }
+
+  &[disabled] {
+    opacity: 0.2;
+    cursor: not-allowed;
   }
 `;

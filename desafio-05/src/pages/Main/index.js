@@ -10,6 +10,7 @@ export default class Main extends React.Component {
   state = {
     repositories: [],
     newRepo: '',
+    loading: false,
   };
 
   handleInputChange = e => {
@@ -19,11 +20,14 @@ export default class Main extends React.Component {
   handleSubmit = async e => {
     e.preventDefault();
 
+    this.setState({ loading: true });
+
     const repo = (await api.get(`/repos/${this.state.newRepo}`)).data;
 
     this.setState({
       repositories: [...this.state.repositories, repo],
       newRepo: '',
+      loading: false,
     });
   };
 
@@ -42,7 +46,7 @@ export default class Main extends React.Component {
             onChange={this.handleInputChange}
             value={this.state.newRepo}
           />
-          <SubmitButton>
+          <SubmitButton loading={this.state.loading}>
             <GoRepo size={16} />
             New
           </SubmitButton>
