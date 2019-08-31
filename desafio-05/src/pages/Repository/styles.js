@@ -14,9 +14,14 @@ export const Owner = styled.div`
   flex-direction: column;
   align-items: center;
 
+  a {
+    margin-bottom: ;
+  }
+
   img {
     width: 120px;
     border-radius: 50%;
+    margin-top: 20px;
   }
 
   h1 {

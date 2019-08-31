@@ -85,14 +85,5 @@ export const List = styled.ul`
     svg {
       margin-right: 10px;
     }
-
-    a {
-      color: #0366d6;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 `;
