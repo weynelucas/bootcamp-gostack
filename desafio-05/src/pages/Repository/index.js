@@ -69,6 +69,7 @@ export default class Repository extends React.Component {
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
+
         <IssueList loading={issuesLoading ? 1 : 0}>
           {issues.map(issue => (
             <li key={issue.id}>
