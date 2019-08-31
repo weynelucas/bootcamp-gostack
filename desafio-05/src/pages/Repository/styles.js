@@ -38,6 +38,7 @@ export const IssueList = styled.ul`
   padding-top: 30px;
   border-top: 1px solid #d1d5da;
   list-style: none;
+  transition: opacity 0.1s linear;
 
   li {
     display: flex;

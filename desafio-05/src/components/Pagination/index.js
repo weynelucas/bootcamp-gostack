@@ -35,7 +35,6 @@ export default class Pagination extends Component {
 
   render() {
     const { page } = this.state;
-    const { totalItems } = this.props;
 
     return (
       <Container>
