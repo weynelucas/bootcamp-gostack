@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { GoMarkGithub, GoRepo, GoSync } from 'react-icons/go';
 
@@ -82,7 +83,9 @@ export default class Main extends React.Component {
           {repositories.map(repo => (
             <li key={repo.name}>
               <GoRepo color="#6a737d" size={16} />
-              <a href="">{repo.name}</a>
+              <Link to={`repository/${encodeURIComponent(repo.name)}`}>
+                {repo.name}
+              </Link>
             </li>
           ))}
         </List>
