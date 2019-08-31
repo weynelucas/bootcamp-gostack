@@ -53,7 +53,6 @@ export const IssueList = styled.ul`
 
     img {
       width: 34px;
-      height: 34px;
       border-radius: 50%;
     }
 
@@ -70,6 +69,15 @@ export const IssueList = styled.ul`
         &:hover {
           text-decoration: underline;
         }
+      }
+
+      span {
+        border-radius: 2px;
+        font-size: 12px;
+        background-color: #d1d5da;
+        padding: 3px;
+        margin-left: 10px;
+        color: #333;
       }
 
       p {

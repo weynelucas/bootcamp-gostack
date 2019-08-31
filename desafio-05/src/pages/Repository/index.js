@@ -52,7 +52,12 @@ export default class Repository extends React.Component {
             <li key={issue.id}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />
               <div>
-                <a href={issue.html_url}>{issue.title}</a>
+                <strong>
+                  <a href={issue.html_url}>{issue.title}</a>
+                  {issue.labels.map(label => (
+                    <span key={label.id}>{label.name}</span>
+                  ))}
+                </strong>
                 <p>{issue.user.login}</p>
               </div>
             </li>
