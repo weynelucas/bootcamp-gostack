@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GoInfo } from 'react-icons/go';
 
 import api from '../../services/api';
 
 import Container from '../../components/Container';
 import Pagination from '../../components/Pagination';
-import { Loading, Owner, IssueList } from './styles';
+import { Loading, Owner, IssueList, Empty } from './styles';
 
 export default class Repository extends React.Component {
   state = {
@@ -85,12 +86,16 @@ export default class Repository extends React.Component {
           ))}
         </IssueList>
 
-        <Pagination
-          page={page}
-          totalItems={repository.open_issues_count}
-          itemsPerPage={5}
-          onPageChanged={page => this.loadIssues({ page })}
-        />
+        {repository.open_issues_count ? (
+          <Pagination
+            page={page}
+            totalItems={repository.open_issues_count}
+            itemsPerPage={5}
+            onPageChanged={page => this.loadIssues({ page })}
+          />
+        ) : (
+          <Empty>This repository has no issues registered yet</Empty>
+        )}
       </Container>
     );
   }

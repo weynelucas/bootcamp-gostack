@@ -104,3 +104,8 @@ export const IssueList = styled.ul`
       opacity: 0.2;
     `}
 `;
+
+export const Empty = styled.p`
+  text-align: center;
+  color: #666;
+`;
