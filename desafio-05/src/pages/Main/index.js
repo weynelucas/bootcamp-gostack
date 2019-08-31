@@ -42,25 +42,23 @@ export default class Main extends React.Component {
     const { repositories, newRepo } = this.state;
 
     try {
+      this.setState({ loading: true });
+
       /**
        * Check duplicated repository
        */
       const isDuplicated = repositories.some(
-        repo => repo.name.toLowerCase() === newRepo.toLowerCase()
+        repo => repo.name.toLowerCase() === newRepo.trim().toLowerCase()
       );
 
       if (isDuplicated) {
         throw new Error('Duplicated repository');
       }
 
-      this.setState({ loading: true });
-
-      const { full_name: name } = (await api.get(
-        `/repos/${this.state.newRepo}`
-      )).data;
+      const { id, full_name: name } = (await api.get(`/repos/${newRepo}`)).data;
 
       this.setState({
-        repositories: [...this.state.repositories, { name }],
+        repositories: [...repositories, { id, name }],
         newRepo: '',
         loading: false,
       });
@@ -103,7 +101,7 @@ export default class Main extends React.Component {
 
         <List>
           {repositories.map(repo => (
-            <li key={repo.name}>
+            <li key={repo.id}>
               <GoRepo color="#6a737d" size={16} />
               <Link to={`repository/${encodeURIComponent(repo.name)}`}>
                 {repo.name}
