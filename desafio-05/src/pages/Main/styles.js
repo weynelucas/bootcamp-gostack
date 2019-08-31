@@ -76,3 +76,32 @@ export const SubmitButton = styled.button.attrs(props => ({
       }
     `}
 `;
+
+export const List = styled.ul`
+  margin-top: 30px;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0;
+
+    & + li {
+      border-top: 1px solid #e1e4e8;
+    }
+
+    svg {
+      margin-right: 10px;
+    }
+
+    a {
+      color: #0366d6;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+`;

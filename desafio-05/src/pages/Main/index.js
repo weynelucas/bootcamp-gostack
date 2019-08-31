@@ -4,7 +4,7 @@ import { GoMarkGithub, GoRepo, GoSync } from 'react-icons/go';
 
 import api from '../../services/api';
 
-import { Container, Form, SubmitButton } from './styles';
+import { Container, Form, SubmitButton, List } from './styles';
 
 export default class Main extends React.Component {
   state = {
@@ -22,17 +22,19 @@ export default class Main extends React.Component {
 
     this.setState({ loading: true });
 
-    const repo = (await api.get(`/repos/${this.state.newRepo}`)).data;
+    const { full_name: name } = (await api.get(
+      `/repos/${this.state.newRepo}`
+    )).data;
 
     this.setState({
-      repositories: [...this.state.repositories, repo],
+      repositories: [...this.state.repositories, { name }],
       newRepo: '',
       loading: false,
     });
   };
 
   render() {
-    const { newRepo, loading } = this.state;
+    const { newRepo, loading, repositories } = this.state;
 
     return (
       <Container>
@@ -59,6 +61,15 @@ export default class Main extends React.Component {
             )}
           </SubmitButton>
         </Form>
+
+        <List>
+          {repositories.map(repo => (
+            <li key={repo.name}>
+              <GoRepo color="#6a737d" size={16} />
+              <a href="">{repo.name}</a>
+            </li>
+          ))}
+        </List>
       </Container>
     );
   }
