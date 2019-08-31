@@ -3,7 +3,7 @@ import React from 'react';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading, Owner } from './styles';
+import { Loading, Owner, IssueList } from './styles';
 
 export default class Repository extends React.Component {
   state = {
@@ -46,6 +46,18 @@ export default class Repository extends React.Component {
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
+
+        <IssueList>
+          {issues.map(issue => (
+            <li key={issue.id}>
+              <img src={issue.user.avatar_url} alt={issue.user.login} />
+              <div>
+                <a href={issue.html_url}>{issue.title}</a>
+                <p>{issue.user.login}</p>
+              </div>
+            </li>
+          ))}
+        </IssueList>
       </Container>
     );
   }
