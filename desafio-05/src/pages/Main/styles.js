@@ -49,7 +49,7 @@ export const SubmitButton = styled.button.attrs(props => ({
   border-radius: 3px;
   cursor: pointer;
 
-  svg {
+  svg:not(:only-child) {
     margin-right: 5px;
   }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GoMarkGithub, GoRepo } from 'react-icons/go';
+import { GoMarkGithub, GoRepo, GoSync } from 'react-icons/go';
 
 import api from '../../services/api';
 
@@ -47,8 +47,14 @@ export default class Main extends React.Component {
             value={this.state.newRepo}
           />
           <SubmitButton loading={this.state.loading}>
-            <GoRepo size={16} />
-            New
+            {this.state.loading ? (
+              <GoSync size={16} />
+            ) : (
+              <>
+                <GoRepo size={16} />
+                <span>New</span>
+              </>
+            )}
           </SubmitButton>
         </Form>
       </Container>
