@@ -32,6 +32,8 @@ export default class Main extends React.Component {
   };
 
   render() {
+    const { newRepo, loading } = this.state;
+
     return (
       <Container>
         <h1>
@@ -44,10 +46,10 @@ export default class Main extends React.Component {
             type="text"
             placeholder="Find a repository..."
             onChange={this.handleInputChange}
-            value={this.state.newRepo}
+            value={newRepo}
           />
-          <SubmitButton loading={this.state.loading}>
-            {this.state.loading ? (
+          <SubmitButton loading={loading ? 1 : 0}>
+            {loading ? (
               <GoSync size={16} />
             ) : (
               <>
