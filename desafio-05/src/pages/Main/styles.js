@@ -30,7 +30,7 @@ export const Form = styled.form`
     padding: 5px 10px;
     margin-right: 10px;
     border-radius: 3px;
-    border: 1px solid #d1d5da;
+    border: 1px solid ${props => (props.error ? '#dc3545' : '#d1d5da')};
     font-size: 16px;
   }
 `;

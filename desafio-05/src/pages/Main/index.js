@@ -13,6 +13,7 @@ export default class Main extends React.Component {
     repositories: [],
     newRepo: '',
     loading: false,
+    error: false,
   };
 
   componentDidMount() {
@@ -32,27 +33,47 @@ export default class Main extends React.Component {
   }
 
   handleInputChange = e => {
-    this.setState({ newRepo: e.target.value });
+    this.setState({ newRepo: e.target.value, error: false });
   };
 
   handleSubmit = async e => {
     e.preventDefault();
 
-    this.setState({ loading: true });
+    const { repositories, newRepo } = this.state;
 
-    const { full_name: name } = (await api.get(
-      `/repos/${this.state.newRepo}`
-    )).data;
+    try {
+      /**
+       * Check duplicated repository
+       */
+      const isDuplicated = repositories.some(
+        repo => repo.name.toLowerCase() === newRepo.toLowerCase()
+      );
 
-    this.setState({
-      repositories: [...this.state.repositories, { name }],
-      newRepo: '',
-      loading: false,
-    });
+      if (isDuplicated) {
+        throw new Error('Duplicated repository');
+      }
+
+      this.setState({ loading: true });
+
+      const { full_name: name } = (await api.get(
+        `/repos/${this.state.newRepo}`
+      )).data;
+
+      this.setState({
+        repositories: [...this.state.repositories, { name }],
+        newRepo: '',
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({
+        error: true,
+        loading: false,
+      });
+    }
   };
 
   render() {
-    const { newRepo, loading, repositories } = this.state;
+    const { newRepo, loading, repositories, error } = this.state;
 
     return (
       <Container>
@@ -61,7 +82,7 @@ export default class Main extends React.Component {
           Repositories
         </Title>
 
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} error={error ? 1 : 0}>
           <input
             type="text"
             placeholder="Find a repository..."
