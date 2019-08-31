@@ -33,8 +33,24 @@ export default class Repository extends React.Component {
     });
   }
 
+  loadIssues = async page => {
+    const {
+      repository: { full_name: repoName },
+    } = this.state;
+
+    const issues = await api.get(`repos/${repoName}/issues`, {
+      params: {
+        per_page: 5,
+        state: 'open',
+        page: page,
+      },
+    });
+
+    this.setState({ issues: issues.data });
+  };
+
   render() {
-    const { repository, issues, loading } = this.state;
+    const { repository, issues, loading, page } = this.state;
 
     if (loading) {
       return <Loading>Carregando...</Loading>;
@@ -63,7 +79,7 @@ export default class Repository extends React.Component {
             </li>
           ))}
         </IssueList>
-        <Pagination />
+        <Pagination page={page} onPageChanged={this.loadIssues} />
       </Container>
     );
   }

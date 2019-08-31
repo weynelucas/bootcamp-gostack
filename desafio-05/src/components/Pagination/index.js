@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Container } from './styles';
+import { Container, ButtonList } from './styles';
 
 export default class Pagination extends Component {
   state = {
@@ -13,7 +13,7 @@ export default class Pagination extends Component {
   }
 
   componentDidMount() {
-    this.setPage(this.props.page);
+    this.setState({ page: this.props.page });
   }
 
   setPage = newPage => {
@@ -31,13 +31,15 @@ export default class Pagination extends Component {
 
     return (
       <Container>
-        <button
-          disabled={this.hasPreviousPage ? 0 : 1}
-          onClick={() => this.setPage(page - 1)}
-        >
-          Previous
-        </button>
-        <button onClick={() => this.setPage(page + 1)}>Next</button>
+        <ButtonList>
+          <button
+            disabled={this.hasPreviousPage ? 0 : 1}
+            onClick={() => this.setPage(page - 1)}
+          >
+            Previous
+          </button>
+          <button onClick={() => this.setPage(page + 1)}>Next</button>
+        </ButtonList>
       </Container>
     );
   }

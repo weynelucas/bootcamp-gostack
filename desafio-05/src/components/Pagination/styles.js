@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ButtonList = styled.div`
   button {
     border: 1px solid #d1d5da;
     background-color: #fff;
