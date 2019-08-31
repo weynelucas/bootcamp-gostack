@@ -3,6 +3,7 @@ import React from 'react';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
+import Pagination from '../../components/Pagination';
 import { Loading, Owner, IssueList } from './styles';
 
 export default class Repository extends React.Component {
@@ -46,7 +47,6 @@ export default class Repository extends React.Component {
           <h1>{repository.name}</h1>
           <p>{repository.description}</p>
         </Owner>
-
         <IssueList>
           {issues.map(issue => (
             <li key={issue.id}>
@@ -63,6 +63,7 @@ export default class Repository extends React.Component {
             </li>
           ))}
         </IssueList>
+        <Pagination />
       </Container>
     );
   }
