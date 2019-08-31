@@ -62,11 +62,12 @@ export const IssueList = styled.ul`
       margin-left: 10px;
 
       a {
-        color: #0366d6;
+        color: #333;
         text-decoration: none;
         font-size: 16px;
 
         &:hover {
+          color: #0366d6;
           text-decoration: underline;
         }
       }
