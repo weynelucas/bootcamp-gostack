@@ -63,7 +63,13 @@ export default class Repository extends React.Component {
   };
 
   render() {
-    const { repository, issues, issuesLoading, loading, page } = this.state;
+    const {
+      repository,
+      issues,
+      issuesLoading,
+      loading,
+      searchParams,
+    } = this.state;
 
     if (loading) {
       return <Loading>Carregando...</Loading>;
@@ -97,7 +103,7 @@ export default class Repository extends React.Component {
 
         {repository.has_issues ? (
           <Pagination
-            page={page}
+            page={searchParams.page}
             totalItems={issues.total_count}
             onPageChanged={this.handlePageChanged}
           />
