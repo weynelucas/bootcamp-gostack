@@ -108,7 +108,7 @@ export default class Repository extends React.Component {
               <IssueHeader>
                 <h1>
                   <GoIssueOpened size={30} color="#222" />
-                  Issues <span>{issues.total_count}</span>
+                  Issues <span>{issues.total_count.toLocaleString('en')}</span>
                 </h1>
                 <select onChange={this.handleSelectChange}>
                   <option value="open">Open</option>
