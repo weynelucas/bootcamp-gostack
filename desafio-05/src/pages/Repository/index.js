@@ -13,6 +13,11 @@ export default class Repository extends React.Component {
     issues: {},
     loading: true,
     issuesLoading: false,
+    searchParams: {
+      page: 1,
+      per_page: 5,
+      state: 'open',
+    },
   };
 
   async componentDidMount() {
@@ -30,16 +35,31 @@ export default class Repository extends React.Component {
     });
   }
 
-  loadIssues = async ({ page, per_page = 5, state = 'open' }) => {
-    const {
-      repository: { full_name: repoName },
-    } = this.state;
+  componentDidUpdate(_, prevState) {
+    const { searchParams, repository } = this.state;
+
+    if (searchParams !== prevState.searchParams) {
+      this.loadRepoIssues();
+    }
+  }
+
+  loadRepoIssues = async () => {
+    const { repository, searchParams } = this.state;
 
     this.setState({ issuesLoading: true });
 
-    const issues = await searchRepoIssues(repoName, { page });
+    const issues = await searchRepoIssues(repository.full_name, searchParams);
 
     this.setState({ issues: issues.data, issuesLoading: false });
+  };
+
+  handlePageChanged = page => {
+    this.setState({
+      searchParams: {
+        ...this.state.searchParams,
+        page,
+      },
+    });
   };
 
   render() {
@@ -79,7 +99,7 @@ export default class Repository extends React.Component {
           <Pagination
             page={page}
             totalItems={issues.total_count}
-            onPageChanged={page => this.loadIssues({ page })}
+            onPageChanged={this.handlePageChanged}
           />
         ) : (
           <Empty>This repository has no issues registered yet</Empty>
