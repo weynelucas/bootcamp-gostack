@@ -66,4 +66,6 @@ Pagination.prototypes = {
 
 Pagination.defaultProps = {
   page: 1,
+  totalItems: 0,
+  itemsPerPage: 5,
 };

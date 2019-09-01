@@ -91,7 +91,6 @@ export default class Repository extends React.Component {
           <Pagination
             page={page}
             totalItems={repository.open_issues_count}
-            itemsPerPage={5}
             onPageChanged={page => this.loadIssues({ page })}
           />
         ) : (
