@@ -36,7 +36,7 @@ export default class Repository extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-    const { searchParams, repository } = this.state;
+    const { searchParams } = this.state;
 
     if (searchParams !== prevState.searchParams) {
       this.loadRepoIssues();
