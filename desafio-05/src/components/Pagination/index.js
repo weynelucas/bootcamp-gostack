@@ -24,12 +24,12 @@ export default class Pagination extends Component {
   }
 
   setPage = newPage => {
-    const { onPageChanged } = this.props;
+    const { onChange } = this.props;
 
     this.setState({ page: newPage });
 
-    if (onPageChanged) {
-      this.props.onPageChanged(newPage);
+    if (onChange) {
+      this.props.onChange(newPage);
     }
   };
 
@@ -61,7 +61,7 @@ Pagination.prototypes = {
   page: PropTypes.number,
   totalItems: PropTypes.number,
   itemsPerPage: PropTypes.number,
-  onPageChanged: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 Pagination.defaultProps = {

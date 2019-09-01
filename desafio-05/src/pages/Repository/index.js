@@ -105,7 +105,7 @@ export default class Repository extends React.Component {
           <Pagination
             page={searchParams.page}
             totalItems={issues.total_count}
-            onPageChanged={this.handlePageChanged}
+            onChange={this.handlePageChanged}
           />
         ) : (
           <Empty>This repository has no issues registered yet</Empty>
