@@ -8,4 +8,31 @@ const api = axios.create({
   },
 });
 
+/**
+ * Return a github search query string based on a
+ * given object
+ */
+function _getQueryString(obj) {
+  return Object.entries(obj)
+    .reduce((args, [key, value]) => {
+      args.append(`${key}:${value}`);
+
+      return args;
+    }, [])
+    .join('+');
+}
+
+export function searchRepoIssues(
+  repoName,
+  { page = 1, per_page = 5, state = 'open' }
+) {
+  return api.get('/search/issues', {
+    params: {
+      q: _getQueryString({ repo: repoName, is: 'issue', is: state }),
+      page,
+      per_page,
+    },
+  });
+}
+
 export default api;
