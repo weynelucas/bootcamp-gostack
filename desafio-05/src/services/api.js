@@ -35,7 +35,7 @@ export function searchRepoIssues(
     is: ['issue', state],
   });
 
-  return api.get('/search/issues?q=' + qString, {
+  return api.get(`/search/issues?q=${qString}`, {
     params: {
       page,
       per_page,
