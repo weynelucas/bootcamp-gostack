@@ -5,7 +5,14 @@ import api, { searchRepoIssues } from '../../services/api';
 
 import Container from '../../components/Container';
 import Pagination from '../../components/Pagination';
-import { Loading, Owner, IssueList, Empty } from './styles';
+import {
+  Loading,
+  Owner,
+  IssueContainer,
+  IssueHeader,
+  IssueList,
+  Empty,
+} from './styles';
 
 export default class Repository extends React.Component {
   state = {
@@ -84,22 +91,32 @@ export default class Repository extends React.Component {
           <p>{repository.description}</p>
         </Owner>
 
-        <IssueList loading={issuesLoading ? 1 : 0}>
-          {issues.items.map(issue => (
-            <li key={issue.id}>
-              <img src={issue.user.avatar_url} alt={issue.user.login} />
-              <div>
-                <strong>
-                  <a href={issue.html_url}>{issue.title}</a>
-                  {issue.labels.map(label => (
-                    <span key={label.id}>{label.name}</span>
-                  ))}
-                </strong>
-                <p>{issue.user.login}</p>
-              </div>
-            </li>
-          ))}
-        </IssueList>
+        <IssueContainer>
+          <IssueHeader>
+            {issues.total_count} issues
+            <select>
+              <option value="open">Open</option>
+              <option value="closed">Closed</option>
+              <option value="all">All</option>
+            </select>
+          </IssueHeader>
+          <IssueList loading={issuesLoading ? 1 : 0}>
+            {issues.items.map(issue => (
+              <li key={issue.id}>
+                <img src={issue.user.avatar_url} alt={issue.user.login} />
+                <div>
+                  <strong>
+                    <a href={issue.html_url}>{issue.title}</a>
+                    {issue.labels.map(label => (
+                      <span key={label.id}>{label.name}</span>
+                    ))}
+                  </strong>
+                  <p>{issue.user.login}</p>
+                </div>
+              </li>
+            ))}
+          </IssueList>
+        </IssueContainer>
 
         {issues.total_count ? (
           <Pagination

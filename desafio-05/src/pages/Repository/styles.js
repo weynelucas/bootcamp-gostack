@@ -34,6 +34,10 @@ export const Owner = styled.div`
   }
 `;
 
+export const IssueContainer = styled.div``;
+
+export const IssueHeader = styled.div``;
+
 export const IssueList = styled.ul`
   margin-top: 30px;
   padding-top: 30px;
@@ -49,10 +53,6 @@ export const IssueList = styled.ul`
     border-color: #d1d5da;
     border-style: solid;
     border-width: 1px;
-
-    &:first-child {
-      border-radius: 3px 3px 0 0;
-    }
 
     &:last-child {
       border-radius: 0 0 3px 3px;
