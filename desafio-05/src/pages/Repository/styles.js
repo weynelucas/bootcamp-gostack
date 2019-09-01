@@ -83,6 +83,10 @@ export const IssueList = styled.ul`
         }
       }
 
+      strong {
+        line-height: 1.9;
+      }
+
       span {
         border-radius: 2px;
         font-size: 12px;
