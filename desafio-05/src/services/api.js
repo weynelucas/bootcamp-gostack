@@ -30,12 +30,13 @@ export function searchRepoIssues(
   repoName,
   { page = 1, per_page = 5, state = 'open' } = {}
 ) {
-  const qString = _getQueryString({
-    repo: repoName,
-    is: state,
-  });
+  const search = { repo: repoName };
 
-  return api.get(`/search/issues?q=${qString}`, {
+  if (['open', 'closed'].includes(state)) {
+    search.is = state;
+  }
+
+  return api.get(`/search/issues?q=${_getQueryString(search)}`, {
     params: {
       page,
       per_page,
