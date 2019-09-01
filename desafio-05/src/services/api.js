@@ -32,7 +32,7 @@ export function searchRepoIssues(
 ) {
   const qString = _getQueryString({
     repo: repoName,
-    is: ['issue', state],
+    is: state,
   });
 
   return api.get(`/search/issues?q=${qString}`, {

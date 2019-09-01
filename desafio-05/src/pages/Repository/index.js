@@ -101,7 +101,7 @@ export default class Repository extends React.Component {
           ))}
         </IssueList>
 
-        {repository.has_issues ? (
+        {issues.total_count ? (
           <Pagination
             page={searchParams.page}
             totalItems={issues.total_count}
