@@ -15,7 +15,11 @@ const api = axios.create({
 function _getQueryString(obj) {
   return Object.entries(obj)
     .reduce((args, [key, value]) => {
-      args.append(`${key}:${value}`);
+      if (Array.isArray(value) && value.length) {
+        value.map(v => (args = [...args, `${key}:${v}`]));
+      } else {
+        args = [...args, `${key}:${value}`];
+      }
 
       return args;
     }, [])
@@ -24,11 +28,15 @@ function _getQueryString(obj) {
 
 export function searchRepoIssues(
   repoName,
-  { page = 1, per_page = 5, state = 'open' }
+  { page = 1, per_page = 5, state = 'open' } = {}
 ) {
-  return api.get('/search/issues', {
+  const qString = _getQueryString({
+    repo: repoName,
+    is: ['issue', state],
+  });
+
+  return api.get('/search/issues?q=' + qString, {
     params: {
-      q: _getQueryString({ repo: repoName, is: 'issue', is: state }),
       page,
       per_page,
     },

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GoInfo } from 'react-icons/go';
 
-import api from '../../services/api';
+import api, { searchRepoIssues } from '../../services/api';
 
 import Container from '../../components/Container';
 import Pagination from '../../components/Pagination';
@@ -11,7 +10,7 @@ import { Loading, Owner, IssueList, Empty } from './styles';
 export default class Repository extends React.Component {
   state = {
     repository: {},
-    issues: [],
+    issues: {},
     loading: true,
     issuesLoading: false,
   };
@@ -21,12 +20,7 @@ export default class Repository extends React.Component {
 
     const [repository, issues] = await Promise.all([
       api.get(`repos/${repoName}`),
-      api.get(`repos/${repoName}/issues`, {
-        params: {
-          per_page: 5,
-          state: 'open',
-        },
-      }),
+      searchRepoIssues(repoName),
     ]);
 
     this.setState({
@@ -71,7 +65,7 @@ export default class Repository extends React.Component {
         </Owner>
 
         <IssueList loading={issuesLoading ? 1 : 0}>
-          {issues.map(issue => (
+          {issues.items.map(issue => (
             <li key={issue.id}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />
               <div>
@@ -90,7 +84,7 @@ export default class Repository extends React.Component {
         {repository.open_issues_count ? (
           <Pagination
             page={page}
-            totalItems={repository.open_issues_count}
+            totalItems={issues.total_count}
             onPageChanged={page => this.loadIssues({ page })}
           />
         ) : (
