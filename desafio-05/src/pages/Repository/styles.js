@@ -34,17 +34,53 @@ export const Owner = styled.div`
   }
 `;
 
-export const IssueContainer = styled.div``;
-
-export const IssueHeader = styled.div``;
-
-export const IssueList = styled.ul`
+export const IssueContainer = styled.div`
   margin-top: 30px;
   padding-top: 30px;
   border-top: 1px solid #d1d5da;
   list-style: none;
   transition: opacity 0.1s linear;
+`;
 
+export const IssueHeader = styled.div`
+  border: 1px solid #d1d5da;
+  border-radius: 3px 3px 0 0;
+  border-bottom: none;
+  padding: 20px 15px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f6f8fa;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: normal;
+
+    span {
+      margin-left: 5px;
+      background-color: rgba(27, 31, 35, 0.08);
+      font-size: 16px;
+      padding: 2px 4px;
+      text-align: center;
+      border-radius: 20px;
+    }
+
+    svg {
+      margin-right: 10px;
+    }
+  }
+
+  select {
+    background-color: transparent;
+    border: none;
+  }
+`;
+
+export const IssueList = styled.ul`
   li {
     display: flex;
     flex-direction: row;

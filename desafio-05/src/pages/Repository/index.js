@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GoIssueOpened } from 'react-icons/go';
 
 import api, { searchRepoIssues } from '../../services/api';
 
@@ -93,7 +94,10 @@ export default class Repository extends React.Component {
 
         <IssueContainer>
           <IssueHeader>
-            {issues.total_count} issues
+            <h1>
+              <GoIssueOpened size={30} color="#222" />
+              Issues <span>{issues.total_count}</span>
+            </h1>
             <select>
               <option value="open">Open</option>
               <option value="closed">Closed</option>
