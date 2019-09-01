@@ -40,6 +40,13 @@ export const IssueContainer = styled.div`
   border-top: 1px solid #d1d5da;
   list-style: none;
   transition: opacity 0.1s linear;
+
+  ${props =>
+    props.loading &&
+    css`
+      opacity: 0.2;
+      pointer-events: none;
+    `}
 `;
 
 export const IssueHeader = styled.div`
@@ -137,12 +144,6 @@ export const IssueList = styled.ul`
       }
     }
   }
-
-  ${props =>
-    props.loading &&
-    css`
-      opacity: 0.2;
-    `}
 `;
 
 export const Empty = styled.p`

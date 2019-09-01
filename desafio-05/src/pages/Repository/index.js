@@ -92,7 +92,7 @@ export default class Repository extends React.Component {
           <p>{repository.description}</p>
         </Owner>
 
-        <IssueContainer>
+        <IssueContainer loading={issuesLoading ? 1 : 0}>
           {issues.total_count ? (
             <>
               <IssueHeader>
@@ -106,7 +106,7 @@ export default class Repository extends React.Component {
                   <option value="all">All</option>
                 </select>
               </IssueHeader>
-              <IssueList loading={issuesLoading ? 1 : 0}>
+              <IssueList>
                 {issues.items.map(issue => (
                   <li key={issue.id}>
                     <img src={issue.user.avatar_url} alt={issue.user.login} />
