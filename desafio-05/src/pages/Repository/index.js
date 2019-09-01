@@ -93,44 +93,46 @@ export default class Repository extends React.Component {
         </Owner>
 
         <IssueContainer>
-          <IssueHeader>
-            <h1>
-              <GoIssueOpened size={30} color="#222" />
-              Issues <span>{issues.total_count}</span>
-            </h1>
-            <select>
-              <option value="open">Open</option>
-              <option value="closed">Closed</option>
-              <option value="all">All</option>
-            </select>
-          </IssueHeader>
-          <IssueList loading={issuesLoading ? 1 : 0}>
-            {issues.items.map(issue => (
-              <li key={issue.id}>
-                <img src={issue.user.avatar_url} alt={issue.user.login} />
-                <div>
-                  <strong>
-                    <a href={issue.html_url}>{issue.title}</a>
-                    {issue.labels.map(label => (
-                      <span key={label.id}>{label.name}</span>
-                    ))}
-                  </strong>
-                  <p>{issue.user.login}</p>
-                </div>
-              </li>
-            ))}
-          </IssueList>
-        </IssueContainer>
+          {issues.total_count ? (
+            <>
+              <IssueHeader>
+                <h1>
+                  <GoIssueOpened size={30} color="#222" />
+                  Issues <span>{issues.total_count}</span>
+                </h1>
+                <select>
+                  <option value="open">Open</option>
+                  <option value="closed">Closed</option>
+                  <option value="all">All</option>
+                </select>
+              </IssueHeader>
+              <IssueList loading={issuesLoading ? 1 : 0}>
+                {issues.items.map(issue => (
+                  <li key={issue.id}>
+                    <img src={issue.user.avatar_url} alt={issue.user.login} />
+                    <div>
+                      <strong>
+                        <a href={issue.html_url}>{issue.title}</a>
+                        {issue.labels.map(label => (
+                          <span key={label.id}>{label.name}</span>
+                        ))}
+                      </strong>
+                      <p>{issue.user.login}</p>
+                    </div>
+                  </li>
+                ))}
+              </IssueList>
 
-        {issues.total_count ? (
-          <Pagination
-            page={searchParams.page}
-            totalItems={issues.total_count}
-            onChange={this.handlePageChanged}
-          />
-        ) : (
-          <Empty>This repository has no issues registered yet</Empty>
-        )}
+              <Pagination
+                page={searchParams.page}
+                totalItems={issues.total_count}
+                onChange={this.handlePageChanged}
+              />
+            </>
+          ) : (
+            <Empty>This repository has no issues registered yet</Empty>
+          )}
+        </IssueContainer>
       </Container>
     );
   }
