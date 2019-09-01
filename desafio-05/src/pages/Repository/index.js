@@ -70,6 +70,15 @@ export default class Repository extends React.Component {
     });
   };
 
+  handleSelectChange = e => {
+    this.setState({
+      searchParams: {
+        ...this.state.searchParams,
+        state: e.target.value,
+      },
+    });
+  };
+
   render() {
     const {
       repository,
@@ -100,7 +109,7 @@ export default class Repository extends React.Component {
                   <GoIssueOpened size={30} color="#222" />
                   Issues <span>{issues.total_count}</span>
                 </h1>
-                <select>
+                <select onChange={this.handleSelectChange}>
                   <option value="open">Open</option>
                   <option value="closed">Closed</option>
                   <option value="all">All</option>
