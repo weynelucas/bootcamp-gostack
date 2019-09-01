@@ -75,6 +75,7 @@ export default class Repository extends React.Component {
       searchParams: {
         ...this.state.searchParams,
         state: e.target.value,
+        page: 1,
       },
     });
   };
@@ -131,7 +132,6 @@ export default class Repository extends React.Component {
                   </li>
                 ))}
               </IssueList>
-
               <Pagination
                 page={searchParams.page}
                 totalItems={issues.total_count}

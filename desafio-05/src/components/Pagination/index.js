@@ -23,6 +23,14 @@ export default class Pagination extends Component {
     this.setState({ page: this.props.page });
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (state.page !== props.page) {
+      return { page: props.page };
+    }
+
+    return null;
+  }
+
   setPage = newPage => {
     const { onChange } = this.props;
 
