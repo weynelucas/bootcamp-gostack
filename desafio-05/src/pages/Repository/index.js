@@ -37,13 +37,7 @@ export default class Repository extends React.Component {
 
     this.setState({ issuesLoading: true });
 
-    const issues = await api.get(`repos/${repoName}/issues`, {
-      params: {
-        state,
-        page,
-        per_page,
-      },
-    });
+    const issues = await searchRepoIssues(repoName, { page });
 
     this.setState({ issues: issues.data, issuesLoading: false });
   };
@@ -81,7 +75,7 @@ export default class Repository extends React.Component {
           ))}
         </IssueList>
 
-        {repository.open_issues_count ? (
+        {repository.has_issues ? (
           <Pagination
             page={page}
             totalItems={issues.total_count}
