@@ -1,5 +1,7 @@
 import React from 'react';
 import { Keyboard, ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
@@ -25,10 +27,26 @@ export default class Main extends React.Component {
     loading: false,
   };
 
+  async componentDidMount() {
+    const users = await AsyncStorage.getItem('users');
+
+    this.setState({ users: JSON.parse(users) || [] });
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { users } = this.state;
+
+    if (users !== prevState.users) {
+      AsyncStorage.setItem('users', JSON.stringify(users));
+    }
+  }
+
   handleAddUser = async () => {
     const { newUser, users } = this.state;
 
     this.setState({ loading: true });
+
+    console.tron.log(users);
 
     const { login, name, bio, avatar_url: avatar } = (await api.get(
       `/users/${newUser}`
