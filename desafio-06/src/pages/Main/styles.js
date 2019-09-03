@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
@@ -31,4 +32,56 @@ export const SubmitButton = styled(RectButton)`
   padding: 0 15px;
   margin-left: 10px;
   border-radius: 4px;
+`;
+
+export const List = styled(FlatList).attrs({
+  showVerticalScrollIndicator: false,
+})`
+  margin-top: 30px;
+`;
+
+export const User = styled.View`
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+`;
+
+export const Avatar = styled.Image`
+  width: 64px;
+  height: 64px;
+  border-radius: 36px;
+  background: #eee;
+`;
+
+export const Name = styled.Text`
+  margin-top: 10px;
+  color: #222;
+  font-weight: bold;
+  font-size: 14px;
+`;
+
+export const Bio = styled.Text.attrs({
+  numberOfLines: 2,
+})`
+  margin-top: 5px;
+  color: #999;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+`;
+
+export const ProfileButton = styled(RectButton)`
+  color: #fff;
+  background-color: #2cbe4e;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  align-self: stretch;
+`;
+
+export const ProfileButtonText = styled.Text`
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
 `;

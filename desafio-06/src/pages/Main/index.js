@@ -4,7 +4,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
 
-import { Container, Form, Input, SubmitButton } from './styles';
+import {
+  Container,
+  Form,
+  Input,
+  SubmitButton,
+  List,
+  User,
+  Avatar,
+  Name,
+  Bio,
+  ProfileButton,
+  ProfileButtonText,
+} from './styles';
 
 export default class Main extends React.Component {
   state = {
@@ -28,7 +40,7 @@ export default class Main extends React.Component {
   };
 
   render() {
-    const { newUser } = this.state;
+    const { newUser, users } = this.state;
 
     return (
       <Container>
@@ -46,6 +58,21 @@ export default class Main extends React.Component {
             <Icon name="add" size={20} color="#fff" />
           </SubmitButton>
         </Form>
+
+        <List
+          keyExtractor={item => item.login}
+          data={users}
+          renderItem={({ item }) => (
+            <User>
+              <Avatar source={{ uri: item.avatar }} />
+              <Name>{item.name}</Name>
+              <Bio>{item.bio}</Bio>
+              <ProfileButton>
+                <ProfileButtonText>Ver Perfil</ProfileButtonText>
+              </ProfileButton>
+            </User>
+          )}
+        />
       </Container>
     );
   }
