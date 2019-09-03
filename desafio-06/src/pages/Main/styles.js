@@ -27,5 +27,6 @@ export const SubmitButton = styled(RectButton)`
   justify-content: center;
   background-color: #2cbe4e;
   padding: 0 15px;
-  margin-left: 15px;
+  margin-left: 10px;
+  border-radius: 4px;
 `;
