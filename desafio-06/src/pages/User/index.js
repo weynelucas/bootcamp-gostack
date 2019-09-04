@@ -47,13 +47,11 @@ export default class User extends Component {
     this.setState({ loadingMore: true });
 
     const response = await api.get(`/users/${user.login}/starred`, {
-      params: {
-        page,
-      },
+      params: { page },
     });
 
     this.setState({
-      starts: [...stars, ...response.data],
+      stars: [...stars, ...response.data],
       loadingMore: false,
     });
   };
