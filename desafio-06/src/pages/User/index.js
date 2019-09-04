@@ -87,6 +87,7 @@ export default class User extends Component {
           </Loading>
         ) : (
           <Stars
+            onEndReachedThreshold={0.2}
             onEndReached={this.loadMore}
             keyExtractor={item => String(item.id)}
             data={stars}
