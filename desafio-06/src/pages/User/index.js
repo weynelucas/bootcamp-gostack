@@ -14,8 +14,7 @@ import {
   Info,
   Title,
   Author,
-  LoadingStars,
-  LoadingMore,
+  Loading,
 } from './styles';
 
 export default class User extends Component {
@@ -43,17 +42,31 @@ export default class User extends Component {
   loadMore = async () => {
     const { page, stars } = this.state;
     const user = this.props.navigation.getParam('user');
+    const newPage = page + 1;
 
     this.setState({ loadingMore: true });
 
     const response = await api.get(`/users/${user.login}/starred`, {
-      params: { page },
+      params: { page: newPage },
     });
 
     this.setState({
       stars: [...stars, ...response.data],
       loadingMore: false,
+      page: newPage,
     });
+  };
+
+  renderListFooter = () => {
+    const { loadingMore } = this.state;
+
+    return (
+      loadingMore && (
+        <Loading>
+          <ActivityIndicator size="small" color="#2cbe4e" />
+        </Loading>
+      )
+    );
   };
 
   render() {
@@ -69,12 +82,11 @@ export default class User extends Component {
         </Header>
 
         {loading ? (
-          <LoadingStars>
+          <Loading>
             <ActivityIndicator size="large" color="#2cbe4e" />
-          </LoadingStars>
+          </Loading>
         ) : (
           <Stars
-            onEndReachedThreshold={0.2}
             onEndReached={this.loadMore}
             keyExtractor={item => String(item.id)}
             data={stars}
@@ -87,13 +99,8 @@ export default class User extends Component {
                 </Info>
               </Starred>
             )}
+            ListFooterComponent={this.renderListFooter}
           />
-        )}
-
-        {loadingMore && (
-          <LoadingMore>
-            <ActivityIndicator size="small" color="#2cbe4e" />
-          </LoadingMore>
         )}
       </Container>
     );

@@ -74,8 +74,9 @@ export const Author = styled.Text`
   font-size: 13px;
 `;
 
-export const LoadingStars = styled.View`
+export const Loading = styled.View`
   flex: 1;
+  margin: 10px 0;
   justify-content: center;
   align-items: center;
 `;
