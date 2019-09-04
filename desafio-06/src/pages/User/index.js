@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import api from '../../services/api';
 import { Container, Header, Avatar, Name, Bio } from './styles';
 
 export default class User extends Component {
@@ -7,7 +8,16 @@ export default class User extends Component {
     title: navigation.getParam('user').name,
   });
 
-  componentDidMount() {}
+  state = {
+    stars: [],
+  };
+
+  async componentDidMount() {
+    const user = this.props.navigation.getParam('user');
+    const response = await api.get(`/users/${user.login}/starred`);
+
+    this.setState({ stars: response.data });
+  }
 
   render() {
     const user = this.props.navigation.getParam('user');
