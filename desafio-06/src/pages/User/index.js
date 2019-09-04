@@ -14,7 +14,7 @@ import {
   Info,
   Title,
   Author,
-  LoadingContainer,
+  LoadingStars,
 } from './styles';
 
 export default class User extends Component {
@@ -50,9 +50,9 @@ export default class User extends Component {
         </Header>
 
         {loading ? (
-          <LoadingContainer>
-            <ActivityIndicator size="large" color="#333" />
-          </LoadingContainer>
+          <LoadingStars>
+            <ActivityIndicator size="large" color="#2cbe4e" />
+          </LoadingStars>
         ) : (
           <Stars
             keyExtractor={item => String(item.id)}
