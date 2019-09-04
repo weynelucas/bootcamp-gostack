@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ActivityIndicator } from 'react-native';
 
 import api from '../../services/api';
 import {
@@ -13,6 +14,7 @@ import {
   Info,
   Title,
   Author,
+  LoadingContainer,
 } from './styles';
 
 export default class User extends Component {
@@ -22,17 +24,21 @@ export default class User extends Component {
 
   state = {
     stars: [],
+    loading: false,
   };
 
   async componentDidMount() {
     const user = this.props.navigation.getParam('user');
+
+    this.setState({ loading: true });
+
     const response = await api.get(`/users/${user.login}/starred`);
 
-    this.setState({ stars: response.data });
+    this.setState({ stars: response.data, loading: false });
   }
 
   render() {
-    const { stars } = this.state;
+    const { stars, loading } = this.state;
     const user = this.props.navigation.getParam('user');
 
     return (
@@ -43,19 +49,25 @@ export default class User extends Component {
           <Bio>{user.bio}</Bio>
         </Header>
 
-        <Stars
-          keyExtractor={item => String(item.id)}
-          data={stars}
-          renderItem={({ item }) => (
-            <Starred>
-              <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
-              <Info>
-                <Title>{item.name}</Title>
-                <Author>{item.owner.login}</Author>
-              </Info>
-            </Starred>
-          )}
-        />
+        {loading ? (
+          <LoadingContainer>
+            <ActivityIndicator size="large" color="#333" />
+          </LoadingContainer>
+        ) : (
+          <Stars
+            keyExtractor={item => String(item.id)}
+            data={stars}
+            renderItem={({ item }) => (
+              <Starred>
+                <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
+                <Info>
+                  <Title>{item.name}</Title>
+                  <Author>{item.owner.login}</Author>
+                </Info>
+              </Starred>
+            )}
+          />
+        )}
       </Container>
     );
   }
