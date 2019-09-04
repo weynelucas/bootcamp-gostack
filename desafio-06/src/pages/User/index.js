@@ -40,9 +40,13 @@ export default class User extends Component {
   }
 
   loadMore = async () => {
-    const { page, stars } = this.state;
+    const { page, stars, loadingMore } = this.state;
     const user = this.props.navigation.getParam('user');
     const newPage = page + 1;
+
+    if (loadingMore) {
+      return;
+    }
 
     this.setState({ loadingMore: true });
 
