@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Container } from './styles';
+import { Container, Header, Avatar, Name, Bio } from './styles';
 
 export default class User extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -10,6 +10,16 @@ export default class User extends Component {
   componentDidMount() {}
 
   render() {
-    return <Container></Container>;
+    const user = this.props.navigation.getParam('user');
+
+    return (
+      <Container>
+        <Header>
+          <Avatar source={{ uri: user.avatar }} />
+          <Name>{user.name}</Name>
+          <Bio>{user.bio}</Bio>
+        </Header>
+      </Container>
+    );
   }
 }
