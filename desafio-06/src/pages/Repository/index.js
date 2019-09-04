@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 
-import { WebView } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 export default class Repository extends Component {
   static navigationOptions = ({ navigation }) => ({

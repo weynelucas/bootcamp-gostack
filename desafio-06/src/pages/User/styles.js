@@ -42,7 +42,7 @@ export const Stars = styled(FlatList).attrs({
   margin-top: 20px;
 `;
 
-export const Starred = styled.View`
+export const Starred = styled.TouchableOpacity`
   flex-direction: row;
   background: #eee;
   border-radius: 4px;
