@@ -23,7 +23,6 @@ export default class User extends Component {
   });
 
   state = {
-    user: {},
     stars: [],
     page: 1,
     isLastPage: false,
@@ -33,47 +32,57 @@ export default class User extends Component {
   };
 
   componentDidMount() {
-    this.setState({ user: this.props.navigation.getParam('user') });
-
-    this.refreshList();
+    this.setState({ loading: true }, this.load);
   }
 
-  refreshList = async () => {
-    const { user } = this.state;
+  load = async (page = 1) => {
+    const { navigation } = this.props;
+    const { stars } = this.state;
 
-    this.setState({ refreshing: true });
+    const user = navigation.getParam('user');
 
-    const response = await api.get(`/users/${user.login}/starred`);
+    const response = await api.get(`/users/${user.login}/starred`, {
+      params: { page },
+    });
 
     this.setState({
-      stars: response.data,
-      page: 1,
-      isLastPage: false,
+      stars: [...stars, ...response.data],
+      page,
+      isLastPage: response.data.length === 0,
+      loading: false,
+      loadingMore: false,
       refreshing: false,
     });
   };
 
-  loadMore = async () => {
-    const { user, page, stars, loadingMore, isLastPage } = this.state;
+  refreshList = () => {
+    this.setState(
+      {
+        stars: [],
+        page: 1,
+        refreshing: true,
+        isLastPage: false,
+      },
+      this.load
+    );
+  };
+
+  loadMore = () => {
+    const { page, isLastPage, loadingMore } = this.state;
 
     if (loadingMore || isLastPage) {
       return;
     }
 
-    const next = page + 1;
+    const nextPage = page + 1;
 
-    this.setState({ loadingMore: true });
-
-    const response = await api.get(`/users/${user.login}/starred`, {
-      params: { page: next },
-    });
-
-    this.setState({
-      stars: [...stars, ...response.data],
-      loadingMore: false,
-      page: next,
-      isLastPage: response.data.length === 0,
-    });
+    this.setState(
+      {
+        loadingMore: true,
+        page: nextPage,
+      },
+      () => this.load(nextPage)
+    );
   };
 
   renderListFooter = () => {
@@ -89,8 +98,10 @@ export default class User extends Component {
   };
 
   render() {
+    const { navigation } = this.props;
     const { stars, loading, refreshing } = this.state;
-    const user = this.props.navigation.getParam('user');
+
+    const user = navigation.getParam('user');
 
     return (
       <Container>
