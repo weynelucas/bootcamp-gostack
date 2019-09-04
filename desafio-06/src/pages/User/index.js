@@ -15,6 +15,7 @@ import {
   Title,
   Author,
   LoadingStars,
+  LoadingMore,
 } from './styles';
 
 export default class User extends Component {
@@ -24,7 +25,9 @@ export default class User extends Component {
 
   state = {
     stars: [],
+    page: 1,
     loading: false,
+    loadingMore: false,
   };
 
   async componentDidMount() {
@@ -37,8 +40,26 @@ export default class User extends Component {
     this.setState({ stars: response.data, loading: false });
   }
 
+  loadMore = async () => {
+    const { page, stars } = this.state;
+    const user = this.props.navigation.getParam('user');
+
+    this.setState({ loadingMore: true });
+
+    const response = await api.get(`/users/${user.login}/starred`, {
+      params: {
+        page,
+      },
+    });
+
+    this.setState({
+      starts: [...stars, ...response.data],
+      loadingMore: false,
+    });
+  };
+
   render() {
-    const { stars, loading } = this.state;
+    const { stars, loading, loadingMore } = this.state;
     const user = this.props.navigation.getParam('user');
 
     return (
@@ -55,6 +76,8 @@ export default class User extends Component {
           </LoadingStars>
         ) : (
           <Stars
+            onEndReachedThreshold={0.2}
+            onEndReached={this.loadMore}
             keyExtractor={item => String(item.id)}
             data={stars}
             renderItem={({ item }) => (
@@ -67,6 +90,12 @@ export default class User extends Component {
               </Starred>
             )}
           />
+        )}
+
+        {loadingMore && (
+          <LoadingMore>
+            <ActivityIndicator size="small" color="#2cbe4e" />
+          </LoadingMore>
         )}
       </Container>
     );

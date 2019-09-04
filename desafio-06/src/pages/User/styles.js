@@ -79,3 +79,9 @@ export const LoadingStars = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const LoadingMore = styled.View`
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+`;
