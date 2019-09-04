@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, RefreshControl } from 'react-native';
 
 import api from '../../services/api';
 import {
@@ -23,19 +23,23 @@ export default class User extends Component {
   });
 
   state = {
+    user: {},
     stars: [],
     page: 1,
+    isLastPage: false,
     loading: false,
     loadingMore: false,
     refreshing: false,
   };
 
   componentDidMount() {
+    this.setState({ user: this.props.navigation.getParam('user') });
+
     this.refreshList();
   }
 
   refreshList = async () => {
-    const user = this.props.navigation.getParam('user');
+    const { user } = this.state;
 
     this.setState({ refreshing: true });
 
@@ -43,29 +47,32 @@ export default class User extends Component {
 
     this.setState({
       stars: response.data,
+      page: 1,
+      isLastPage: false,
       refreshing: false,
     });
   };
 
   loadMore = async () => {
-    const { page, stars, loadingMore } = this.state;
-    const user = this.props.navigation.getParam('user');
-    const newPage = page + 1;
+    const { user, page, stars, loadingMore, isLastPage } = this.state;
 
-    if (loadingMore) {
+    if (loadingMore || isLastPage) {
       return;
     }
+
+    const next = page + 1;
 
     this.setState({ loadingMore: true });
 
     const response = await api.get(`/users/${user.login}/starred`, {
-      params: { page: newPage },
+      params: { page: next },
     });
 
     this.setState({
       stars: [...stars, ...response.data],
       loadingMore: false,
-      page: newPage,
+      page: next,
+      isLastPage: response.data.length === 0,
     });
   };
 
@@ -75,7 +82,7 @@ export default class User extends Component {
     return (
       loadingMore && (
         <Loading>
-          <ActivityIndicator size="small" color="#2cbe4e" />
+          <ActivityIndicator size="small" color="#222" />
         </Loading>
       )
     );
@@ -95,7 +102,7 @@ export default class User extends Component {
 
         {loading ? (
           <Loading>
-            <ActivityIndicator size="large" color="#2cbe4e" />
+            <ActivityIndicator size="large" color="#222" />
           </Loading>
         ) : (
           <Stars
