@@ -5,6 +5,7 @@ export const ProductList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   list-style: none;
+  gap: 10px;
 
   li {
     display: flex;
