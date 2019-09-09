@@ -30,10 +30,7 @@ function Cart({ products, updateAmmount }) {
           {products.map(product => (
             <tr key={product.id}>
               <td>
-                <img
-                  src={product.image}
-                  alt={product.title}
-                />
+                <img src={product.image} alt={product.title} />
               </td>
               <td>
                 <strong>{product.title}</strong>
@@ -43,7 +40,9 @@ function Cart({ products, updateAmmount }) {
                 <div>
                   <button
                     title="Diminuir quantidade"
-                    onClick={() => updateAmmount(product.id, product.ammount - 1)}
+                    onClick={() =>
+                      updateAmmount(product.id, product.ammount - 1)
+                    }
                   >
                     <MdRemoveCircleOutline size={20} color="#7159c1" />
                   </button>
@@ -52,7 +51,9 @@ function Cart({ products, updateAmmount }) {
 
                   <button
                     title="Aumentar a quantidade"
-                    onClick={() => updateAmmount(product.id, product.ammount + 1)}
+                    onClick={() =>
+                      updateAmmount(product.id, product.ammount + 1)
+                    }
                   >
                     <MdAddCircleOutline size={20} color="#7159c1" />
                   </button>
@@ -93,4 +94,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(CartActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);

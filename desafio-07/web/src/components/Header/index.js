@@ -30,4 +30,4 @@ const mapStateToProps = state => ({
   total: state.cart.length,
 });
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps)(Header);
