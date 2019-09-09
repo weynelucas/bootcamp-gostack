@@ -13,7 +13,7 @@ import * as CartActions from '../../store/reducers/cart/actions';
 import { Container, ProductTable, Total } from './styles';
 import { formatPrice } from '../../util/format';
 
-function Cart({ products, updateAmmount }) {
+function Cart({ products, total, updateAmmount }) {
   return (
     <Container>
       <ProductTable>
@@ -76,7 +76,7 @@ function Cart({ products, updateAmmount }) {
 
         <Total>
           <span>TOTAL</span>
-          <strong>R$ 1920,28</strong>
+          <strong>{total}</strong>
         </Total>
       </footer>
     </Container>
@@ -89,6 +89,12 @@ const mapStateToProps = state => ({
     priceFormatted: formatPrice(product.price),
     subtotal: formatPrice(product.price * product.ammount),
   })),
+  total: formatPrice(
+    state.cart.reduce((total, product) => {
+      total += product.price * product.ammount;
+      return total;
+    }, 0)
+  ),
 });
 
 const mapDispatchToProps = dispatch =>
