@@ -44,7 +44,9 @@ export default function Cart() {
                 </button>
               </div>
             </td>
-            <td>R$ 259,80</td>
+            <td>
+              <strong>R$ 259,80</strong>
+            </td>
             <td>
               <button title="Remover produto">
                 <MdDelete size={20} color="#7159c1" />
