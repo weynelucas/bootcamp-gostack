@@ -8,10 +8,12 @@ import {
   MdDelete,
 } from 'react-icons/md';
 
+import * as CartActions from '../../store/reducers/cart/actions';
+
 import { Container, ProductTable, Total } from './styles';
 import { formatPrice } from '../../util/format';
 
-function Cart({ products }) {
+function Cart({ products, updateAmmount }) {
   return (
     <Container>
       <ProductTable>
@@ -26,7 +28,7 @@ function Cart({ products }) {
         </thead>
         <tbody>
           {products.map(product => (
-            <tr>
+            <tr key={product.id}>
               <td>
                 <img
                   src={product.image}
@@ -39,12 +41,20 @@ function Cart({ products }) {
               </td>
               <td>
                 <div>
-                  <button title="Diminuir quantidade">
-                    <MdAddCircleOutline size={20} color="#7159c1" />
-                  </button>
-                  <input type="text" readOnly value={product.ammount} />
-                  <button title="Aumentar a quantidade">
+                  <button
+                    title="Diminuir quantidade"
+                    onClick={() => updateAmmount(product.id, product.ammount - 1)}
+                  >
                     <MdRemoveCircleOutline size={20} color="#7159c1" />
+                  </button>
+
+                  <input type="text" readOnly value={product.ammount} />
+
+                  <button
+                    title="Aumentar a quantidade"
+                    onClick={() => updateAmmount(product.id, product.ammount + 1)}
+                  >
+                    <MdAddCircleOutline size={20} color="#7159c1" />
                   </button>
                 </div>
               </td>
@@ -80,4 +90,7 @@ const mapStateToProps = state => ({
   })),
 });
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

@@ -4,3 +4,11 @@ export function addProduct(product) {
     product,
   }
 }
+
+export function updateAmmount(productId, ammount) {
+  return {
+    type: '@cart/UPDATE_QUANTITY',
+    productId,
+    ammount,
+  }
+}

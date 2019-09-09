@@ -17,6 +17,20 @@ export default function cart(state=[], action) {
         }
       });
 
+    case '@cart/UPDATE_QUANTITY':
+      return produce(state, draftState => {
+        const { productId, ammount } = action;
+        const productIndex = draftState.findIndex(p => p.id === productId);
+
+        if (productIndex !== -1) {
+          if (ammount > 0) {
+            draftState[productIndex].ammount = ammount;
+          } else {
+            draftState.splice(productIndex, 1);
+          }
+        }
+      });
+
     default:
       return state;
   }

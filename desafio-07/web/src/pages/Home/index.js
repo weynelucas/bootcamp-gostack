@@ -55,4 +55,5 @@ class Home extends React.Component {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(CartActions, dispatch);
 
+
 export default connect(null, mapDispatchToProps)(Home)
