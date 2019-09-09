@@ -13,7 +13,7 @@ import * as CartActions from '../../store/reducers/cart/actions';
 import { Container, ProductTable, Total } from './styles';
 import { formatPrice } from '../../util/format';
 
-function Cart({ products, total, updateAmmount }) {
+function Cart({ products, total, updateAmmount, removeProduct }) {
   return (
     <Container>
       <ProductTable>
@@ -63,7 +63,10 @@ function Cart({ products, total, updateAmmount }) {
                 <strong>{product.subtotal}</strong>
               </td>
               <td>
-                <button title="Remover produto">
+                <button
+                  title="Remover produto"
+                  onClick={() => removeProduct(product.id)}
+                >
                   <MdDelete size={20} color="#7159c1" />
                 </button>
               </td>
