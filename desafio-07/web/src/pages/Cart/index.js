@@ -8,7 +8,7 @@ import {
   MdDelete,
 } from 'react-icons/md';
 
-import * as CartActions from '../../store/reducers/cart/actions';
+import * as CartActions from '../../store/modules/cart/actions';
 
 import { Container, ProductTable, Total } from './styles';
 import { formatPrice } from '../../util/format';

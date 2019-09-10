@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { MdAddShoppingCart } from 'react-icons/md';
 
 import api from '../../services/api';
-import * as CartActions from '../../store/reducers/cart/actions';
+import * as CartActions from '../../store/modules/cart/actions';
 
 import { ProductList } from './styles';
 import { formatPrice } from '../../util/format';
