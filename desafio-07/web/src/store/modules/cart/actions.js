@@ -30,7 +30,7 @@ export function updateAmountSuccess(productId, amount) {
 
 export function removeFromCart(productId) {
   return {
-    type: '@cart/REMOVE_REQUEST',
+    type: '@cart/REMOVE',
     productId,
   };
 }

@@ -5,16 +5,17 @@ import { formatPrice } from '../../../util/format';
 import {
   addToCartSuccess,
   updateAmountSuccess,
+  removeFromCart,
 } from '../../../store/modules/cart/actions';
 
 function* addToCart({ productId }) {
-  const product = yield select(store => {
-    return store.cart.find(p => p.id === productId);
-  });
+  const product = yield select(store =>
+    store.cart.find(p => p.id === productId)
+  );
 
-  const stockResponse = yield call(api.get, `/stock/${productId}`);
+  const response = yield call(api.get, `/stock/${productId}`);
 
-  const { amount: stock } = stockResponse.data;
+  const { amount: stock } = response.data;
 
   if (product && product.amount === stock) {
     return;
@@ -35,4 +36,29 @@ function* addToCart({ productId }) {
   }
 }
 
-export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
+function* updateAmount({ productId, amount }) {
+  console.log(amount);
+  if (amount === 0) {
+    yield put(removeFromCart(productId));
+    return;
+  }
+
+  const product = yield select(store =>
+    store.cart.find(p => p.id === productId)
+  );
+
+  const response = yield call(api.get, `/stock/${productId}`);
+
+  const { amount: stock } = response.data;
+
+  if (product && amount > stock) {
+    return;
+  }
+
+  yield put(updateAmountSuccess(productId, amount));
+}
+
+export default all([
+  takeLatest('@cart/ADD_REQUEST', addToCart),
+  takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
+]);
