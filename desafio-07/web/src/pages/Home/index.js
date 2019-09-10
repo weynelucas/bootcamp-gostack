@@ -28,7 +28,7 @@ class Home extends React.Component {
 
   render() {
     const { products } = this.state;
-    const { ammount, addToCart } = this.props;
+    const { ammount, addToCartRequest } = this.props;
 
     return (
       <ProductList>
@@ -38,7 +38,7 @@ class Home extends React.Component {
             <strong>{product.title}</strong>
             <span>{product.priceFormatted}</span>
 
-            <button type="button" onClick={() => addToCart(product)}>
+            <button type="button" onClick={() => addToCartRequest(product)}>
               <div>
                 <MdAddShoppingCart size={16} color="#fff" />
                 {ammount[product.id] || 0}
