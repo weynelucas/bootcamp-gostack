@@ -38,7 +38,7 @@ class Home extends React.Component {
             <strong>{product.title}</strong>
             <span>{product.priceFormatted}</span>
 
-            <button type="button" onClick={() => addToCartRequest(product)}>
+            <button type="button" onClick={() => addToCartRequest(product.id)}>
               <div>
                 <MdAddShoppingCart size={16} color="#fff" />
                 {ammount[product.id] || 0}

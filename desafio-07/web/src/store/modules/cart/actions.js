@@ -1,7 +1,7 @@
-export function addToCartRequest(product) {
+export function addToCartRequest(productId) {
   return {
     type: '@cart/ADD_REQUEST',
-    product,
+    productId,
   };
 }
 
