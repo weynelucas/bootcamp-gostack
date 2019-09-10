@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 import background from '../assets/images/background.svg';
 
 export default createGlobalStyle`
@@ -23,8 +25,16 @@ export default createGlobalStyle`
     padding: 0 20px 50px
   }
 
-  body, input, button {
+  body, input, button, .Toastify__toast-body {
     font-size: 14px;
     font-family: Roboto, sans-serif;
+  }
+
+  .Toastify__toast {
+    border-radius: 4px !important;
+  }
+
+  .Toastify__toast-body {
+    font-size: 16px;
   }
 `;

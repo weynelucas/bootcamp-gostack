@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest, select } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import api from '../../../services/api';
 import { formatPrice } from '../../../util/format';
@@ -18,6 +19,7 @@ function* addToCart({ productId }) {
   const { amount: stock } = response.data;
 
   if (product && product.amount === stock) {
+    toast.error('Quantidade solicitada fora de estoque.');
     return;
   }
 
@@ -37,7 +39,6 @@ function* addToCart({ productId }) {
 }
 
 function* updateAmount({ productId, amount }) {
-  console.log(amount);
   if (amount === 0) {
     yield put(removeFromCart(productId));
     return;
@@ -52,6 +53,7 @@ function* updateAmount({ productId, amount }) {
   const { amount: stock } = response.data;
 
   if (product && amount > stock) {
+    toast.error('Quantidade solicitada fora de estoque.');
     return;
   }
 
