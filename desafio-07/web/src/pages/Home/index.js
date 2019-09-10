@@ -28,7 +28,7 @@ class Home extends React.Component {
 
   render() {
     const { products } = this.state;
-    const { productsAmmount, addProduct } = this.props;
+    const { ammount, addProduct } = this.props;
 
     return (
       <ProductList>
@@ -41,7 +41,7 @@ class Home extends React.Component {
             <button type="button" onClick={() => addProduct(product)}>
               <div>
                 <MdAddShoppingCart size={16} color="#fff" />
-                {productsAmmount[product.id] || 0}
+                {ammount[product.id] || 0}
               </div>
               <span>Adicionar ao carrinho</span>
             </button>
@@ -53,9 +53,9 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  productsAmmount: state.cart.reduce((productsAmmount, product) => {
+  ammount: state.cart.reduce((ammount, product) => {
     return {
-      ...productsAmmount,
+      ...ammount,
       [product.id]: product.ammount,
     };
   }, {}),
