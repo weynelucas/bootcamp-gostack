@@ -12,19 +12,19 @@ export function addToCartSuccess(product) {
   };
 }
 
-export function updateAmmountRequest(productId, ammount) {
+export function updateAmountRequest(productId, amount) {
   return {
-    type: '@cart/UPDATE_AMMOUNT_REQUEST',
+    type: '@cart/UPDATE_AMOUNT_REQUEST',
     productId,
-    ammount,
+    amount,
   };
 }
 
-export function updateAmmountSuccess(productId, ammount) {
+export function updateAmountSuccess(productId, amount) {
   return {
-    type: '@cart/UPDATE_AMMOUNT_SUCCESS',
+    type: '@cart/UPDATE_AMOUNT_SUCCESS',
     productId,
-    ammount,
+    amount,
   };
 }
 

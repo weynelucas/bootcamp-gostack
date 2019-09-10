@@ -13,7 +13,7 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { Container, ProductTable, Total } from './styles';
 import { formatPrice } from '../../util/format';
 
-function Cart({ products, total, updateAmmountRequest, removeFromCart }) {
+function Cart({ products, total, updateAmountRequest, removeFromCart }) {
   return (
     <Container>
       <ProductTable>
@@ -41,18 +41,18 @@ function Cart({ products, total, updateAmmountRequest, removeFromCart }) {
                   <button
                     title="Diminuir quantidade"
                     onClick={() =>
-                      updateAmmountRequest(product.id, product.ammount - 1)
+                      updateAmountRequest(product.id, product.amount - 1)
                     }
                   >
                     <MdRemoveCircleOutline size={20} color="#7159c1" />
                   </button>
 
-                  <input type="text" readOnly value={product.ammount} />
+                  <input type="text" readOnly value={product.amount} />
 
                   <button
                     title="Aumentar a quantidade"
                     onClick={() =>
-                      updateAmmountRequest(product.id, product.ammount + 1)
+                      updateAmountRequest(product.id, product.amount + 1)
                     }
                   >
                     <MdAddCircleOutline size={20} color="#7159c1" />
@@ -90,11 +90,11 @@ const mapStateToProps = state => ({
   products: state.cart.map(product => ({
     ...product,
     priceFormatted: formatPrice(product.price),
-    subtotal: formatPrice(product.price * product.ammount),
+    subtotal: formatPrice(product.price * product.amount),
   })),
   total: formatPrice(
     state.cart.reduce((total, product) => {
-      total += product.price * product.ammount;
+      total += product.price * product.amount;
       return total;
     }, 0)
   ),
