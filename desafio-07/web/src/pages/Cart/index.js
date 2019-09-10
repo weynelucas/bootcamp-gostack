@@ -13,7 +13,7 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { Container, ProductTable, Total } from './styles';
 import { formatPrice } from '../../util/format';
 
-function Cart({ products, total, updateAmmount, removeProduct }) {
+function Cart({ products, total, updateAmmount, removeFromCart }) {
   return (
     <Container>
       <ProductTable>
@@ -65,7 +65,7 @@ function Cart({ products, total, updateAmmount, removeProduct }) {
               <td>
                 <button
                   title="Remover produto"
-                  onClick={() => removeProduct(product.id)}
+                  onClick={() => removeFromCart(product.id)}
                 >
                   <MdDelete size={20} color="#7159c1" />
                 </button>

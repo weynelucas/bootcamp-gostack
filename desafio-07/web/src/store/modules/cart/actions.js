@@ -1,11 +1,11 @@
-export function addProduct(product) {
+export function addToCart(product) {
   return {
     type: '@cart/ADD',
     product,
   };
 }
 
-export function removeProduct(productId) {
+export function removeFromCart(productId) {
   return {
     type: '@cart/REMOVE',
     productId,
