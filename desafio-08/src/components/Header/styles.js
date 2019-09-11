@@ -21,7 +21,6 @@ export const CartAmount = styled.Text`
   top: 1;
   right: -5;
   font-size: 12px;
-  height: 16px;
   width: 16px;
   border-radius: 8px;
   color: #fff;
