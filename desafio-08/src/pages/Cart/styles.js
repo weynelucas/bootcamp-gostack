@@ -125,3 +125,14 @@ export const CheckoutButtonText = styled.Text`
   padding: 13px;
   text-transform: uppercase;
 `;
+
+export const CartEmpty = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CartEmptyText = styled.Text`
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+`;
