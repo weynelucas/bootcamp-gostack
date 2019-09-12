@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../services/api';
 import colors from '../../styles/colors';
 import {
   AddToCartButton,
@@ -15,25 +16,21 @@ import {
 } from './styles';
 
 export default function Home({navigation}) {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function loadProducts() {
+      const response = await api.get('/products');
+      setProducts(response.data);
+    }
+
+    loadProducts();
+  }, []);
+
   return (
     <Container>
       <ProductList
-        data={[
-          {
-            id: 1,
-            title: 'Tênis de Caminhada Leve Confortável',
-            price: 179.9,
-            image:
-              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg',
-          },
-          {
-            id: 2,
-            title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino',
-            price: 139.9,
-            image:
-              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
-          },
-        ]}
+        data={products}
         horizontal={true}
         keyExtractor={item => String(item.id)}
         renderItem={({item}) => (

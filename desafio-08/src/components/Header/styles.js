@@ -16,7 +16,7 @@ export const Logo = styled.Image`
 `;
 
 export const CartButton = styled(BorderlessButton).attrs({
-  rippleColor: darken(0.02, colors.dark),
+  rippleColor: darken(0.05, colors.dark),
 })`
   position: relative;
   align-items: center;
