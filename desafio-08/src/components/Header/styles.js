@@ -1,4 +1,7 @@
 import styled from 'styled-components/native';
+import {BorderlessButton} from 'react-native-gesture-handler';
+import colors from '../../styles/colors';
+import {darken} from 'polished';
 
 export const Container = styled.View`
   flex: 1;
@@ -12,18 +15,23 @@ export const Logo = styled.Image`
   height: 24px;
 `;
 
-export const Cart = styled.View`
+export const CartButton = styled(BorderlessButton).attrs({
+  rippleColor: darken(0.1, colors.dark),
+})`
   position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
 `;
 
 export const CartAmount = styled.Text`
   position: absolute;
-  top: 1;
-  right: -5;
+  top: 0;
+  right: 0;
   font-size: 12px;
   width: 16px;
   border-radius: 8px;
-  color: #fff;
+  color: ${colors.white};
   text-align: center;
-  background-color: #7159c1;
+  background-color: ${colors.primary};
 `;

@@ -5,6 +5,7 @@ import {createAppContainer} from 'react-navigation';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import colors from './styles/colors';
 
 export default createAppContainer(
   createStackNavigator(
@@ -13,13 +14,13 @@ export default createAppContainer(
       Cart,
     },
     {
-      defaultNavigationOptions: {
-        headerTitle: <Header />,
-        headerTintColor: '#fff',
+      defaultNavigationOptions: navigation => ({
+        headerTitle: <Header {...navigation} />,
+        headerTintColor: colors.white,
         headerStyle: {
-          backgroundColor: '#141419',
+          backgroundColor: colors.dark,
         },
-      },
+      }),
     },
   ),
 );
