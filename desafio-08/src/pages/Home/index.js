@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 import colors from '../../styles/colors';
+import {formatPrice} from '../../util/format';
 import {
   AddToCartButton,
   AddToCartButtonText,
@@ -21,7 +22,9 @@ export default function Home({navigation}) {
   useEffect(() => {
     async function loadProducts() {
       const response = await api.get('/products');
-      setProducts(response.data);
+      setProducts(
+        response.data.map(p => ({...p, priceFormatted: formatPrice(p.price)})),
+      );
     }
 
     loadProducts();
@@ -37,7 +40,7 @@ export default function Home({navigation}) {
           <ProductItem>
             <ProductImage source={{uri: item.image}} />
             <ProductTitle>{item.title}</ProductTitle>
-            <ProductPrice>{item.price}</ProductPrice>
+            <ProductPrice>{item.priceFormatted}</ProductPrice>
             <AddToCartButton>
               <ProductAmount>
                 <Icon name="add-shopping-cart" size={16} color={colors.white} />
