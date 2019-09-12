@@ -51,6 +51,7 @@ export default function Cart() {
                 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
             },
           ]}
+          keyExtractor={item => String(item.id)}
           renderItem={({item}) => (
             <CartItem>
               <CartItemBody>

@@ -15,6 +15,8 @@ export const CartContainer = styled.View`
   padding: 15px;
 `;
 
+export const CartList = styled(FlatList)``;
+
 export const CartItem = styled.View`
   margin-bottom: 20px;
 `;
@@ -123,5 +125,3 @@ export const CheckoutButtonText = styled.Text`
   padding: 13px;
   text-transform: uppercase;
 `;
-
-export const CartList = styled(FlatList)``;
