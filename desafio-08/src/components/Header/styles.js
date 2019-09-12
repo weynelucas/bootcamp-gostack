@@ -1,7 +1,7 @@
-import styled from 'styled-components/native';
-import {BorderlessButton} from 'react-native-gesture-handler';
-import colors from '../../styles/colors';
 import {darken} from 'polished';
+import {BorderlessButton} from 'react-native-gesture-handler';
+import styled from 'styled-components/native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;

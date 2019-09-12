@@ -1,10 +1,8 @@
 import React from 'react';
-
-import logo from '../../assets/logo.png';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import {Container, Logo, CartButton, CartTotal} from './styles';
+import logo from '../../assets/logo.png';
+import colors from '../../styles/colors';
+import {CartButton, CartTotal, Container, Logo} from './styles';
 
 export default function Header({navigation}) {
   return (
@@ -12,7 +10,7 @@ export default function Header({navigation}) {
       <Logo source={logo} />
 
       <CartButton onPress={() => navigation.navigate('Cart')}>
-        <Icon name="shopping-basket" color="#fff" size={26} />
+        <Icon name="shopping-basket" color={colors.white} size={26} />
         <CartTotal>3</CartTotal>
       </CartButton>
     </Container>
