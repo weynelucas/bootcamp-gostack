@@ -1,6 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {CartContainer, CartEmpty, CartEmptyText, Container} from './styles';
+import colors from '../../styles/colors';
+import {
+  CartContainer,
+  CartEmpty,
+  CartEmptyText,
+  CartFooter,
+  CartItem,
+  CartItemActionButton,
+  CartItemActions,
+  CartItemAmount,
+  CartItemBody,
+  CartItemDeleteButton,
+  CartItemFooter,
+  CartItemImage,
+  CartItemInfo,
+  CartItemPrice,
+  CartItemSubtotal,
+  CartItemTitle,
+  CartList,
+  CartTotal,
+  CartTotalText,
+  CheckoutButton,
+  CheckoutButtonText,
+  Container,
+} from './styles';
 
 export default function Cart() {
   const [products] = useState([
@@ -34,10 +58,10 @@ export default function Cart() {
             <CartList
               data={products}
               keyExtractor={item => String(item.id)}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <CartItem>
                   <CartItemBody>
-                    <CartItemImage source={{uri: item.image}} />
+                    <CartItemImage source={{ uri: item.image }} />
                     <CartItemInfo>
                       <CartItemTitle>{item.title}</CartItemTitle>
                       <CartItemPrice>{item.priceFormatted}</CartItemPrice>
