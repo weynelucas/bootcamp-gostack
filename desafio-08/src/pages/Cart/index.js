@@ -44,6 +44,7 @@ export default function Cart() {
               id: 2,
               title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino',
               price: 139.9,
+              amount: 1,
               priceFormatted: 'R$ 139,90',
               subtotal: 'R$ 139,90',
               image:
@@ -59,26 +60,34 @@ export default function Cart() {
                   <CartItemPrice>{item.priceFormatted}</CartItemPrice>
                 </CartItemInfo>
                 <CartItemDeleteButton>
-                  <Icon name="delete-forever" size={24} color={colors.white} />
+                  <Icon
+                    name="delete-forever"
+                    size={24}
+                    color={colors.primary}
+                  />
                 </CartItemDeleteButton>
               </CartItemBody>
+
               <CartItemFooter>
                 <CartItemActions>
                   <CartItemActionButton>
                     <Icon
                       name="remove-circle-outline"
                       size={20}
-                      color={colors.white}
+                      color={colors.primary}
                     />
                   </CartItemActionButton>
 
-                  <CartItemAmount value={item.amount} keyboardType="numeric" />
+                  <CartItemAmount
+                    value={String(item.amount)}
+                    keyboardType="numeric"
+                  />
 
                   <CartItemActionButton>
                     <Icon
                       name="add-circle-outline"
                       size={20}
-                      color={colors.white}
+                      color={colors.primary}
                     />
                   </CartItemActionButton>
                 </CartItemActions>
