@@ -24,7 +24,7 @@ export const CartButton = styled(BorderlessButton).attrs({
   padding: 5px;
 `;
 
-export const CartAmount = styled.Text`
+export const CartTotal = styled.Text`
   position: absolute;
   top: 0;
   right: 0;
