@@ -1,6 +1,6 @@
-import {rgba} from 'polished';
-import {FlatList} from 'react-native';
-import {RectButton} from 'react-native-gesture-handler';
+import { rgba } from 'polished';
+import { FlatList } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 

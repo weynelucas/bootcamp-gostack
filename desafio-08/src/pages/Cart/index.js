@@ -50,75 +50,71 @@ export default function Cart() {
     <Container>
       <CartContainer>
         {items.length ? (
-          <>
-            <CartList
-              data={items}
-              keyExtractor={item => String(item.id)}
-              renderItem={({ item }) => (
-                <CartItem>
-                  <CartItemBody>
-                    <CartItemImage source={{ uri: item.image }} />
-                    <CartItemInfo>
-                      <CartItemTitle>{item.title}</CartItemTitle>
-                      <CartItemPrice>{item.priceFormatted}</CartItemPrice>
-                    </CartItemInfo>
-                    <CartItemDeleteButton
-                      onPress={() => dispatch(removeFromCart(item.id))}>
+          <CartList
+            data={items}
+            keyExtractor={item => String(item.id)}
+            renderItem={({ item }) => (
+              <CartItem>
+                <CartItemBody>
+                  <CartItemImage source={{ uri: item.image }} />
+                  <CartItemInfo>
+                    <CartItemTitle>{item.title}</CartItemTitle>
+                    <CartItemPrice>{item.priceFormatted}</CartItemPrice>
+                  </CartItemInfo>
+                  <CartItemDeleteButton
+                    onPress={() => dispatch(removeFromCart(item.id))}>
+                    <Icon
+                      name="delete-forever"
+                      size={24}
+                      color={colors.primary}
+                    />
+                  </CartItemDeleteButton>
+                </CartItemBody>
+
+                <CartItemFooter>
+                  <CartItemActions>
+                    <CartItemActionButton
+                      onPress={() =>
+                        dispatch(updateAmountRequest(item.id, item.amount - 1))
+                      }>
                       <Icon
-                        name="delete-forever"
-                        size={24}
+                        name="remove-circle-outline"
+                        size={20}
                         color={colors.primary}
                       />
-                    </CartItemDeleteButton>
-                  </CartItemBody>
+                    </CartItemActionButton>
 
-                  <CartItemFooter>
-                    <CartItemActions>
-                      <CartItemActionButton
-                        onPress={() =>
-                          dispatch(
-                            updateAmountRequest(item.id, item.amount - 1),
-                          )
-                        }>
-                        <Icon
-                          name="remove-circle-outline"
-                          size={20}
-                          color={colors.primary}
-                        />
-                      </CartItemActionButton>
+                    <CartItemAmount
+                      value={String(item.amount)}
+                      keyboardType="numeric"
+                    />
 
-                      <CartItemAmount
-                        value={String(item.amount)}
-                        keyboardType="numeric"
+                    <CartItemActionButton
+                      onPress={() =>
+                        dispatch(updateAmountRequest(item.id, item.amount + 1))
+                      }>
+                      <Icon
+                        name="add-circle-outline"
+                        size={20}
+                        color={colors.primary}
                       />
+                    </CartItemActionButton>
+                  </CartItemActions>
 
-                      <CartItemActionButton
-                        onPress={() =>
-                          dispatch(
-                            updateAmountRequest(item.id, item.amount + 1),
-                          )
-                        }>
-                        <Icon
-                          name="add-circle-outline"
-                          size={20}
-                          color={colors.primary}
-                        />
-                      </CartItemActionButton>
-                    </CartItemActions>
-
-                    <CartItemSubtotal>{item.subtotal}</CartItemSubtotal>
-                  </CartItemFooter>
-                </CartItem>
-              )}
-            />
-            <CartFooter>
-              <CartTotalText>TOTAL</CartTotalText>
-              <CartTotal>{total}</CartTotal>
-              <CheckoutButton>
-                <CheckoutButtonText>FINALIZAR PEDIDO</CheckoutButtonText>
-              </CheckoutButton>
-            </CartFooter>
-          </>
+                  <CartItemSubtotal>{item.subtotal}</CartItemSubtotal>
+                </CartItemFooter>
+              </CartItem>
+            )}
+            ListFooterComponent={
+              <CartFooter>
+                <CartTotalText>TOTAL</CartTotalText>
+                <CartTotal>{total}</CartTotal>
+                <CheckoutButton>
+                  <CheckoutButtonText>FINALIZAR PEDIDO</CheckoutButtonText>
+                </CheckoutButton>
+              </CartFooter>
+            }
+          />
         ) : (
           <CartEmpty>
             <Icon name="remove-shopping-cart" color="#ddd" size={35} />
