@@ -1,6 +1,6 @@
 import React from 'react';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import Header from './components/Header';
 import Cart from './pages/Cart';
 import Home from './pages/Home';
@@ -14,7 +14,7 @@ export default createAppContainer(
     },
     {
       defaultNavigationOptions: navigation => ({
-        headerTitle: <Header {...navigation} />,
+        headerTitle: <Header navigation={navigation.navigation} />,
         headerTintColor: colors.white,
         headerStyle: {
           backgroundColor: colors.dark,

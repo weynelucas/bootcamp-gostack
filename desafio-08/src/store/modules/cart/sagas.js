@@ -2,6 +2,7 @@ import { put, call, takeLatest, all, select } from 'redux-saga/effects';
 import api from '../../../services/api';
 import { addToCartSuccess, updateAmountSuccess } from './actions';
 import { formatPrice } from '../../../util/format';
+import NavigationService from '../../../services/navigation';
 
 function* addToCart({ productId }) {
   const cartItem = yield select(store =>
@@ -29,6 +30,8 @@ function* addToCart({ productId }) {
       }),
     );
   }
+
+  NavigationService.navigate('Cart');
 }
 
 export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
