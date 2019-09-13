@@ -1,4 +1,5 @@
 import { put, call, takeLatest, all, select } from 'redux-saga/effects';
+import { Alert } from 'react-native';
 import api from '../../../services/api';
 import {
   addToCartSuccess,
@@ -17,6 +18,7 @@ function* addToCart({ productId }) {
   const { amount } = stockResponse.data;
 
   if (cartItem && cartItem.amount >= amount) {
+    Alert.alert('Quantidade solicitada fora de estoque.');
     return;
   }
 
@@ -43,7 +45,7 @@ function* updateAmount({ productId, amount: productAmount }) {
   const { amount: stockAmount } = stockResponse.data;
 
   if (productAmount > stockAmount) {
-    // eslint-disable-next-line no-useless-return
+    Alert.alert('Quantidade solicitada fora de estoque.');
     return;
   }
   if (productAmount <= 0) {
