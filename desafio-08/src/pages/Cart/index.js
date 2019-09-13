@@ -27,7 +27,10 @@ import {
   Container,
 } from './styles';
 import { formatPrice } from '../../util/format';
-import { removeFromCart } from '../../store/modules/cart/actions';
+import {
+  removeFromCart,
+  updateAmountRequest,
+} from '../../store/modules/cart/actions';
 
 export default function Cart() {
   const items = useSelector(({ cart }) =>
@@ -71,7 +74,12 @@ export default function Cart() {
 
                   <CartItemFooter>
                     <CartItemActions>
-                      <CartItemActionButton>
+                      <CartItemActionButton
+                        onPress={() =>
+                          dispatch(
+                            updateAmountRequest(item.id, item.amount - 1),
+                          )
+                        }>
                         <Icon
                           name="remove-circle-outline"
                           size={20}
@@ -84,7 +92,12 @@ export default function Cart() {
                         keyboardType="numeric"
                       />
 
-                      <CartItemActionButton>
+                      <CartItemActionButton
+                        onPress={() =>
+                          dispatch(
+                            updateAmountRequest(item.id, item.amount + 1),
+                          )
+                        }>
                         <Icon
                           name="add-circle-outline"
                           size={20}

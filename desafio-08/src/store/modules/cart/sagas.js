@@ -1,6 +1,10 @@
 import { put, call, takeLatest, all, select } from 'redux-saga/effects';
 import api from '../../../services/api';
-import { addToCartSuccess, updateAmountSuccess } from './actions';
+import {
+  addToCartSuccess,
+  updateAmountSuccess,
+  removeFromCart,
+} from './actions';
 import { formatPrice } from '../../../util/format';
 import NavigationService from '../../../services/navigation';
 
@@ -34,4 +38,22 @@ function* addToCart({ productId }) {
   NavigationService.navigate('Cart');
 }
 
-export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
+function* updateAmount({ productId, amount: productAmount }) {
+  const stockResponse = yield call(api.get, `/stock/${productId}`);
+  const { amount: stockAmount } = stockResponse.data;
+
+  if (productAmount > stockAmount) {
+    // eslint-disable-next-line no-useless-return
+    return;
+  }
+  if (productAmount <= 0) {
+    yield put(removeFromCart(productId));
+  } else {
+    yield put(updateAmountSuccess(productId, productAmount));
+  }
+}
+
+export default all([
+  takeLatest('@cart/ADD_REQUEST', addToCart),
+  takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
+]);
