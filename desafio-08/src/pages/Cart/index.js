@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../styles/colors';
 import {
@@ -25,38 +26,30 @@ import {
   CheckoutButtonText,
   Container,
 } from './styles';
+import { formatPrice } from '../../util/format';
+import { removeFromCart } from '../../store/modules/cart/actions';
 
 export default function Cart() {
-  const [products] = useState([
-    {
-      id: 1,
-      title: 'Tênis de Caminhada Leve Confortável',
-      price: 179.9,
-      priceFormatted: 'R$ 179,90',
-      amount: 3,
-      subtotal: 'R$ 539,70',
-      image:
-        'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg',
-    },
-    {
-      id: 2,
-      title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino',
-      price: 139.9,
-      amount: 1,
-      priceFormatted: 'R$ 139,90',
-      subtotal: 'R$ 139,90',
-      image:
-        'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
-    },
-  ]);
+  const items = useSelector(({ cart }) =>
+    cart.map(p => ({
+      ...p,
+      subtotal: formatPrice(p.amount * p.price),
+    })),
+  );
+
+  const total = useSelector(({ cart }) =>
+    formatPrice(cart.reduce((previous, p) => previous + p.price * p.amount, 0)),
+  );
+
+  const dispatch = useDispatch();
 
   return (
     <Container>
       <CartContainer>
-        {products.length ? (
+        {items.length ? (
           <>
             <CartList
-              data={products}
+              data={items}
               keyExtractor={item => String(item.id)}
               renderItem={({ item }) => (
                 <CartItem>
@@ -66,7 +59,8 @@ export default function Cart() {
                       <CartItemTitle>{item.title}</CartItemTitle>
                       <CartItemPrice>{item.priceFormatted}</CartItemPrice>
                     </CartItemInfo>
-                    <CartItemDeleteButton>
+                    <CartItemDeleteButton
+                      onPress={() => dispatch(removeFromCart(item.id))}>
                       <Icon
                         name="delete-forever"
                         size={24}
@@ -106,7 +100,7 @@ export default function Cart() {
             />
             <CartFooter>
               <CartTotalText>TOTAL</CartTotalText>
-              <CartTotal>R$ 1619,10</CartTotal>
+              <CartTotal>{total}</CartTotal>
               <CheckoutButton>
                 <CheckoutButtonText>FINALIZAR PEDIDO</CheckoutButtonText>
               </CheckoutButton>
