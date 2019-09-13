@@ -48,7 +48,7 @@ export const CartItemPrice = styled.Text`
 `;
 
 export const CartItemActionButton = styled(BorderlessButton).attrs({
-  rippleColor: '#ddd',
+  rippleColor: colors.gray,
 })`
   align-items: center;
 `;
@@ -60,7 +60,7 @@ export const CartItemFooter = styled.View`
   border-radius: 4px;
   margin-top: 20px;
   padding: 7px 10px;
-  background-color: #eee;
+  background-color: ${colors.lightGray};
 `;
 
 export const CartItemActions = styled.View`
@@ -75,9 +75,9 @@ export const CartItemAmount = styled.TextInput.attrs({
   border-radius: 4px;
   margin: 0 5px;
   padding: 5px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid ${colors.lightGray};
   font-size: 14px;
-  color: #666;
+  color: ${colors.darkerGray};
 `;
 
 export const CartItemSubtotal = styled.Text`
@@ -95,7 +95,7 @@ export const CartFooter = styled.View`
 export const CartTotalText = styled.Text`
   font-size: 16px;
   line-height: 19px;
-  color: #999;
+  color: ${colors.darkGray};
 `;
 
 export const CartTotal = styled.Text`

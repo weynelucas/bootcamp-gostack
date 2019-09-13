@@ -31,7 +31,7 @@ export const ProductTitle = styled.Text.attrs({
 })`
   font-size: 16px;
   line-height: 21px;
-  color: #333333;
+  color: #333;
 `;
 
 export const ProductPrice = styled.Text`

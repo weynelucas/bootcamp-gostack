@@ -46,7 +46,7 @@ export default function Cart() {
     formatPrice(cart.reduce((previous, p) => previous + p.price * p.amount, 0)),
   );
 
-  function renderItem({ item }) {
+  function renderItem(item) {
     return (
       <CartItem>
         <CartItemBody>
@@ -116,12 +116,16 @@ export default function Cart() {
           <CartList
             data={items}
             keyExtractor={item => String(item.id)}
-            renderItem={renderItem}
+            renderItem={({ item }) => renderItem(item)}
             ListFooterComponent={renderFooter}
           />
         ) : (
           <CartEmpty>
-            <Icon name="remove-shopping-cart" color="#ddd" size={50} />
+            <Icon
+              name="remove-shopping-cart"
+              color={colors.lightGray}
+              size={50}
+            />
             <CartEmptyText>Seu carrinho está vazio.</CartEmptyText>
           </CartEmpty>
         )}
