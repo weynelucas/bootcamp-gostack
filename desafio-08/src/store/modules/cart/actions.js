@@ -34,3 +34,15 @@ export function removeFromCart(productId) {
     productId,
   };
 }
+
+export function checkoutRequest() {
+  return {
+    type: '@cart/CHECKOUT_REQUEST',
+  };
+}
+
+export function checkoutSuccess() {
+  return {
+    type: '@cart/CHECKOUT_SUCCESS',
+  };
+}

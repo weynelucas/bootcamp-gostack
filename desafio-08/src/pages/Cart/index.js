@@ -29,6 +29,7 @@ import { formatPrice } from '../../util/format';
 import {
   removeFromCart,
   updateAmountRequest,
+  checkoutRequest,
 } from '../../store/modules/cart/actions';
 
 export default function Cart() {
@@ -113,7 +114,7 @@ export default function Cart() {
             <CartFooter>
               <CartTotalText>TOTAL</CartTotalText>
               <CartTotal>{total}</CartTotal>
-              <CheckoutButton>
+              <CheckoutButton onPress={() => dispatch(checkoutRequest())}>
                 <CheckoutButtonText>FINALIZAR PEDIDO</CheckoutButtonText>
               </CheckoutButton>
             </CartFooter>

@@ -1,6 +1,8 @@
 import { produce } from 'immer';
 
-export default function cart(state = [], action) {
+const initialState = [];
+
+export default function cart(state = initialState, action) {
   switch (action.type) {
     case '@cart/ADD_SUCCESS': {
       const { product } = action;
@@ -18,6 +20,10 @@ export default function cart(state = [], action) {
           product.amount = amount;
         }
       });
+    }
+
+    case '@cart/CHECKOUT_SUCCESS': {
+      return initialState;
     }
 
     case '@cart/REMOVE': {
