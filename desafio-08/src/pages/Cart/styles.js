@@ -13,6 +13,7 @@ export const CartContainer = styled.View`
   border-radius: 4px;
   background-color: ${colors.white};
   padding: 15px;
+  flex: 1;
 `;
 
 export const CartList = styled(FlatList)``;
@@ -25,7 +26,6 @@ export const CartItemBody = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex: 1;
 `;
 
 export const CartItemImage = styled.Image`
@@ -48,7 +48,7 @@ export const CartItemPrice = styled.Text`
   font-weight: bold;
 `;
 
-export const CartItemDeleteButton = styled(BorderlessButton).attrs({
+export const CartItemActionButton = styled(BorderlessButton).attrs({
   rippleColor: '#ddd',
 })`
   align-items: center;
@@ -68,10 +68,6 @@ export const CartItemActions = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-
-export const CartItemActionButton = styled(BorderlessButton).attrs({
-  rippleColor: '#ddd',
-})``;
 
 export const CartItemAmount = styled.TextInput.attrs({
   editable: false,
@@ -129,6 +125,7 @@ export const CheckoutButtonText = styled.Text`
 export const CartEmpty = styled.View`
   justify-content: center;
   align-items: center;
+  flex: 1;
 `;
 
 export const CartEmptyText = styled.Text`
