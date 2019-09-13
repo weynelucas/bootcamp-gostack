@@ -4,7 +4,6 @@ export default function cart(state = [], action) {
   switch (action.type) {
     case '@cart/ADD_SUCCESS': {
       const { product } = action;
-
       return produce(state, draft => {
         draft.push(product);
       });

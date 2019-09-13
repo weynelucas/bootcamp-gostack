@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 import colors from '../../styles/colors';
@@ -20,6 +20,13 @@ import { addToCartRequest } from '../../store/modules/cart/actions';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+
+  const amounts = useSelector(store =>
+    store.cart.reduce(
+      (obj, product) => ({ ...obj, [product.id]: product.amount }),
+      {},
+    ),
+  );
 
   const dispatch = useDispatch();
 
@@ -52,7 +59,7 @@ export default function Home() {
               onPress={() => dispatch(addToCartRequest(item.id))}>
               <ProductAmount>
                 <Icon name="add-shopping-cart" size={16} color={colors.white} />
-                <ProductAmountText>3</ProductAmountText>
+                <ProductAmountText>{amounts[item.id] || 0}</ProductAmountText>
               </ProductAmount>
               <AddToCartButtonText>ADICIONAR</AddToCartButtonText>
             </AddToCartButton>
