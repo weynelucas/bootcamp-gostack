@@ -13,7 +13,6 @@ export const CartContainer = styled.View`
   border-radius: 4px;
   background-color: ${colors.white};
   padding: 15px;
-  flex: 1;
 `;
 
 export const CartList = styled(FlatList)``;
@@ -125,7 +124,6 @@ export const CheckoutButtonText = styled.Text`
 export const CartEmpty = styled.View`
   justify-content: center;
   align-items: center;
-  flex: 1;
 `;
 
 export const CartEmptyText = styled.Text`
