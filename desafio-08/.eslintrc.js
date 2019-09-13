@@ -25,10 +25,10 @@ module.exports = {
         extensions: ['.jsx', '.js'],
       },
     ],
-    'import/prefer-default-export-default': 'off',
+    'import/prefer-default-export': 'off',
     'no-param-reassign': 'off',
-    'no-console': ['error', {allow: ['tron']}],
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exaustive-deps': 'warn',
+    'no-console': ['error', { allow: ['tron'] }],
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
   },
 };

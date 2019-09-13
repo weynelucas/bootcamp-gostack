@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 import colors from '../../styles/colors';
-import {formatPrice} from '../../util/format';
+import { formatPrice } from '../../util/format';
 import {
   AddToCartButton,
   AddToCartButtonText,
@@ -15,15 +16,21 @@ import {
   ProductPrice,
   ProductTitle,
 } from './styles';
+import { addToCartRequest } from '../../store/modules/cart/actions';
 
-export default function Home({navigation}) {
+export default function Home() {
   const [products, setProducts] = useState([]);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function loadProducts() {
       const response = await api.get('/products');
       setProducts(
-        response.data.map(p => ({...p, priceFormatted: formatPrice(p.price)})),
+        response.data.map(p => ({
+          ...p,
+          priceFormatted: formatPrice(p.price),
+        })),
       );
     }
 
@@ -34,14 +41,15 @@ export default function Home({navigation}) {
     <Container>
       <ProductList
         data={products}
-        horizontal={true}
+        horizontal
         keyExtractor={item => String(item.id)}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <ProductItem>
-            <ProductImage source={{uri: item.image}} />
+            <ProductImage source={{ uri: item.image }} />
             <ProductTitle>{item.title}</ProductTitle>
             <ProductPrice>{item.priceFormatted}</ProductPrice>
-            <AddToCartButton>
+            <AddToCartButton
+              onPress={() => dispatch(addToCartRequest(item.id))}>
               <ProductAmount>
                 <Icon name="add-shopping-cart" size={16} color={colors.white} />
                 <ProductAmountText>3</ProductAmountText>
