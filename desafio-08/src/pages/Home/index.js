@@ -32,12 +32,20 @@ export default function Home() {
 
   useEffect(() => {
     async function loadProducts() {
-      const response = await api.get('/products');
+      const stockResponse = await api.get('/stock');
+      const productsResponse = await api.get('/products');
+
+      const productsWithStock = stockResponse.data
+        .filter(stock => stock.amount > 0)
+        .map(stock => stock.id);
+
       setProducts(
-        response.data.map(p => ({
-          ...p,
-          priceFormatted: formatPrice(p.price),
-        })),
+        productsResponse.data
+          .map(p => ({
+            ...p,
+            priceFormatted: formatPrice(p.price),
+          }))
+          .filter(p => productsWithStock.includes(p.id)),
       );
     }
 
