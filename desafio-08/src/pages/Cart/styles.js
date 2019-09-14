@@ -32,12 +32,13 @@ export const CartItemImage = styled.Image`
   height: 80px;
 `;
 
-export const CartItemInfo = styled.View``;
+export const CartItemInfo = styled.View`
+  flex: 0.6;
+`;
 
 export const CartItemTitle = styled.Text`
   font-size: 14px;
   color: #333;
-  max-width: 200px;
 `;
 
 export const CartItemPrice = styled.Text`
